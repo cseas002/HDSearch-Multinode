@@ -192,9 +192,12 @@ sudo likwid-perfctr -C 0-2 -g CLOCK sleep 1
 ### Incorporate in HDSearch Run Scripts
 
 
-### Instructions for Cloudlab 
+## Instructions for Cloudlab 
 
-*Profile:* linux-4-15-18-deb
-*Number of nodes:* 3
-*OS:* Ubuntu 18.04
-*Cluster Type:* c220g5 (skylake)
+`Profile:` linux-4-15-18-deb
+
+`Number of nodes:` 3
+
+`OS:` Ubuntu 18.04
+
+`Cluster Type:` c220g5 (skylake)
