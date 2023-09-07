@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/ganton12/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/ganton12/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     expose:
         - "50050"
@@ -95,7 +95,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/ganton12/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/ganton12/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     expose:
         - "50054"
@@ -132,7 +132,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/ganton12/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/ganton12/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     cap_add:
         - SYS_PTRACE      

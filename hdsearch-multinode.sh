@@ -7,6 +7,8 @@ get_profiler () {
   if [[ ! -d "profiler/" ]]; then
  
     git clone https://github.com/georgiantoniou/profiler.git
+
+  fi
  
 }
 

@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/PanaNik/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/PanaNik/HDSearch-Multinode/microsuite_files/:/home/data
     expose:
         - "50050"
         - "50051"
@@ -115,7 +115,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/PanaNik/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/PanaNik/HDSearch-Multinode/microsuite_files/:/home/data
     expose:
         - "50054"
     cap_add:
@@ -167,7 +167,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/PanaNik/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+        - /users/PanaNik/HDSearch-Multinode/microsuite_files/:/home/data
     cap_add:
         - SYS_PTRACE      
     deploy:
