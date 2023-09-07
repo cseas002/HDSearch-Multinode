@@ -1,0 +1,43 @@
+---
+- name: Initialize cluster manager
+  hosts: client
+  tags: 
+  - init_master
+  tasks:
+  - name: Init Master      
+    ignore_errors: yes
+    shell: sudo docker swarm init --advertise-addr 10.10.1.1
+
+- name: Initialize workers
+  hosts:
+  - midtier
+  - bucket
+  tags: 
+  - init_workers
+  tasks:
+  - name: Init Workers
+    shell: sudo docker swarm join --token $(ssh node0 "sudo docker swarm join-token worker -q") 10.10.1.1:2377
+    async: 10000 
+    poll: 0  
+- name: Check Status of run
+  hosts: client
+  tags: 
+  - check_status
+  tasks:
+  - name: Check Status      
+    ignore_errors: yes
+    shell: ~/HDSearch-Multinode/scripts/check-run-status.sh
+
+- name: Leave Swarm
+  hosts:
+  - midtier
+  - bucket
+  - client
+  tags: 
+  - leave_swarm
+  tasks:
+  - name: Leave Swarm
+    shell: sudo docker swarm leave --force
+    async: 10000 
+    poll: 0
+

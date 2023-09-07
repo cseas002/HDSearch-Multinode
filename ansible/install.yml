@@ -1,0 +1,38 @@
+---
+- name: Install HDSearch
+  hosts: 
+  - midtier
+  - bucket
+  tasks:    
+  - name: Install HDSearch if not exists
+    unarchive: 
+      src: ~/HDSearch-Multinode.tgz 
+      dest: ~/
+
+- name: Set Up Docker Curl
+  hosts:
+  - client
+  - midtier
+  - bucket
+  tasks:
+    - name: Set up docker 
+      command: sudo ~/HDSearch-Multinode/scripts/set-up-docker.sh
+- name: Make space to commit
+  hosts:
+  - client
+  - midtier
+  - bucket
+  tags: setup_docker
+  tasks:
+    - name: Make Space to Commit Image
+      command: sudo ~/HDSearch-Multinode/scripts/change-storage-location-docker.sh
+- name: Install Profiler Dep
+  hosts:
+  - midtier
+  - bucket
+  tags: install_profiler
+  tasks:
+    - name: Install Profiler 
+      shell: cd ~/HDSearch-Multinode/profiler; ~/HDSearch-Multinode/profiler/setHosts.sh 1 $(hostname | awk -F"." '{print $1}' | sed 's/node//g') $(hostname | awk -F"." '{print $1}' | sed 's/node//g'); ./profiler.sh install
+
+
