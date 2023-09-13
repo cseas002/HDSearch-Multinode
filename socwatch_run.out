@@ -422,3 +422,26 @@ node1                      : ok=2    changed=1    unreachable=0    failed=0    s
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
 
 INFO:root:ssh node0 hostname
+INFO:root:Connection closed by 10.10.1.1 port 22
+['node2']['node1']
+ssh -n node2 "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
+ssh -n node1 "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
+ansible-playbook -v -i hosts -e "" --tags "setup_docker" ansible/install.yml
+ansible-playbook -v -i hosts -e "" --tags "set_profiler_hosts" ansible/profiler.yml
+ansible-playbook -v -i hosts -e "" --tags "leave_swarm" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "" --tags "init_master" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "" --tags "init_workers" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "MSR_VALUE=0x1414"  ansible/configure.yml
+ansible-playbook -v -i hosts -e "" --tags "kill_profiler" ansible/profiler.yml
+Traceback (most recent call last):
+  File "run_experiment.py", line 432, in <module>
+    main(sys.argv[1:])
+  File "run_experiment.py", line 428, in main
+    run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+  File "run_experiment.py", line 352, in run_multiple_experiments
+    status = run_single_experiment(system_conf,root_results_dir, name_prefix, instance_conf, iter,bucket,midtier)
+  File "run_experiment.py", line 272, in run_single_experiment
+    run_remote(client_conf)
+  File "run_experiment.py", line 167, in run_remote
+    os.environ[str(key)] = exec_command("ssh node{} hostname".format(i))[0]
+IndexError: list index out of range
