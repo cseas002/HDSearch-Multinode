@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+  - name: Install tools
+    become: yes
+    apt:
+      update_cache: yes
+      pkg:
+      - sysstat
+      - msr-tools
+      - linux-tools-common
+      - linux-tools-generic
+      - linux-tools-{{ ansible_kernel }}
+    when: ansible_distribution == 'Ubuntu'

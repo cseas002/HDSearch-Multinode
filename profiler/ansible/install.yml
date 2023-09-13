@@ -1,0 +1,9 @@
+---
+- name: Install profiler
+  hosts: 
+  - profiler
+  tasks:
+  - name: Install profiler script
+    copy: 
+      src: ../profiler.py
+      dest: "{{ PROFILER_HOME }}"

@@ -1,0 +1,37 @@
+---
+- name: Run remote profiler
+  hosts: profiler
+  tags: 
+  - run_profiler
+  tasks:
+  - name: Run remote profiler
+    command: "python3 {{ PROFILER_HOME }}/profiler.py -i {{ ITERATION }} -t {{ PID }}"
+    async: 10000 
+    poll: 0
+    register: run_profiler_result_async
+  - name: Check remote profiler
+    async_status: jid="{{ run_profiler_result_async.ansible_job_id }}"
+- name: Kill remote profiler
+  hosts: profiler
+  tags: 
+  - kill_profiler
+  tasks:
+  - name: Get the PID of running process
+    ignore_errors: yes
+    shell: "ps -few | grep profiler | awk '{print $2}'"
+    register: running_processes
+  - name: Kill remote profiler       
+    ignore_errors: yes
+    shell: kill {{ item }}
+    with_items: "{{ running_processes.stdout_lines }}"
+
+- name: Run remote socwatch  
+  hosts: 
+  -bucket
+  -midtier  
+  tags:   - run_socwatch  
+  tasks:  
+  - name: Run remote socwatch    
+    command: sudo /opt/intel/oneapi/vtune/2023.0.0/socwatch/x64/socwatch -s 60 -t {{ MONITOR_TIME }} -f cpu-cstate -m -r int -o {{ OUTPUT_FILE }}    
+    async: 10000     
+    poll: 0 
