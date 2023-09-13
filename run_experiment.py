@@ -89,17 +89,17 @@ def stop_profiler(bucket,midtier):
         exec_command("sudo python3 profiler/profiler.py -n {} stop".format(node))
 
     for node in midtier:
-        exec_command("sudo python3 /users/ganton12/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
+        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
 
 def report_profiler(bucket,midtier,results_dir_path):
     
     for node in bucket:
         dir_path = os.path.join(results_dir_path, "bucket_" + node)
-        exec_command("sudo python3 /users/ganton12/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
     for node in midtier:
         dir_path = os.path.join(results_dir_path, "midtier_" + node)
-        exec_command("sudo python3 /users/ganton12/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
 def kill_profiler(bucket,midtier):
     run_ansible_playbook(
@@ -251,6 +251,10 @@ def configure_hdsearch_node(conf):
                 os.system('ssh -n {} "~/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
     return bucket,midtier
 
+def run_socwatch(name):  # Georgia you has an extra parameter here named "conf"
+    extravars = ['MONIT0R_TIME={}'.format("40"), 'OUTPUT_FILE={}'.format(name)]
+    run_ansible_playbook(inventory='hosts', extravars=extravars, playbook='./ansible/profiler.yml', tags='run_socwatch')
+
 def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf, idx,bucket,midtier):
     name = name_prefix + client_conf.shortname()
     results_dir_name = "{}-{}".format(name, idx)
@@ -272,6 +276,9 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
         return profiler_output
     print("Profilerrrrr putput " + str(profiler_output))
     
+    # Added function 
+    run_socwatch(name)
+
     run_output = run_ansible_playbook(
         inventory='hosts', 
         playbook='ansible/hdsearch.yml', 
@@ -284,6 +291,24 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     stop_profiler(bucket,midtier)
     report_profiler(bucket,midtier,hdsearch_results_dir_path)
     
+    
+    # Calling script
+
+    # For midtier
+    while True:
+        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
+        if (int(active_socwatch[0]) > 2):
+            break
+        time.sleep(30)
+    
+    # For bucket
+    while True:
+        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
+        if (int(active_socwatch[0]) > 2):
+            break
+        time.sleep(30)
+
+
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
     rawoutput=exec_command("sudo docker service logs microsuite_client --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
@@ -338,11 +363,11 @@ def main(argv):
     # kernelconfig first argument is for midtier and second for bucket server
     system_confs = [
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': False},
-          #{'turbo': False, 'kernelconfig': ['baseline', 'baseline'], 'ht': False},
+          {'turbo': False, 'kernelconfig': ['baseline', 'baseline'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_c6', 'disable_c6'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_c1e_c6', 'disable_c1e_c6'], 'ht': False},
-          {'turbo': True, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': True}
+        #   {'turbo': True, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': True}
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'baseline'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_c6'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_c1e_c6'], 'ht': False},
@@ -400,7 +425,7 @@ def main(argv):
     batch_name = argv[0]
     for iter in range(0, 5):
         for system_conf in system_confs:
-            run_multiple_experiments('/users/ganton12/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+            run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
 
 
 if __name__ == '__main__':
