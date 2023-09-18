@@ -25,13 +25,4 @@
     shell: kill {{ item }}
     with_items: "{{ running_processes.stdout_lines }}"
 
-- name: Run remote socwatch  
-  hosts: 
-  -bucket
-  -midtier  
-  tags:   - run_socwatch  
-  tasks:  
-  - name: Run remote socwatch    
-    command: sudo /opt/intel/oneapi/vtune/2023.0.0/socwatch/x64/socwatch -s 60 -t {{ MONITOR_TIME }} -f cpu-cstate -m -r int -o {{ OUTPUT_FILE }}    
-    async: 10000     
-    poll: 0 
+

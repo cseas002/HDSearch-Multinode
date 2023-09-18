@@ -254,7 +254,7 @@ core 16: disabled
 core 17: disabled
 core 18: disabled
 core 19: disabled
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Install HDSearch] ********************************************************
 
@@ -290,7 +290,7 @@ node0                      : ok=3    changed=1    unreachable=0    failed=0    s
 node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set profiler] ************************************************************
 
@@ -299,8 +299,8 @@ ok: [node1]
 ok: [node2]
 
 TASK [Set profiler Hosts] ******************************************************
-changed: [node2] => {"ansible_job_id": "324919533010.4925", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/324919533010.4925", "started": 1}
-changed: [node1] => {"ansible_job_id": "370642112436.4823", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/370642112436.4823", "started": 1}
+changed: [node2] => {"ansible_job_id": "324919533010.4925", "changed": true, "finished": 0, "results_file": "~/.ansible_async/324919533010.4925", "started": 1}
+changed: [node1] => {"ansible_job_id": "370642112436.4823", "changed": true, "finished": 0, "results_file": "~/.ansible_async/370642112436.4823", "started": 1}
 
 PLAY [Run remote profiler] *****************************************************
 
@@ -310,7 +310,7 @@ PLAY RECAP *********************************************************************
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -326,16 +326,16 @@ ok: [node1]
 ok: [node2]
 
 TASK [Leave Swarm] *************************************************************
-changed: [node1] => {"ansible_job_id": "78256286315.4932", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/78256286315.4932", "started": 1}
-changed: [node2] => {"ansible_job_id": "800976772871.5034", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/800976772871.5034", "started": 1}
-changed: [node0] => {"ansible_job_id": "313882042820.10882", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/313882042820.10882", "started": 1}
+changed: [node1] => {"ansible_job_id": "78256286315.4932", "changed": true, "finished": 0, "results_file": "~/.ansible_async/78256286315.4932", "started": 1}
+changed: [node2] => {"ansible_job_id": "800976772871.5034", "changed": true, "finished": 0, "results_file": "~/.ansible_async/800976772871.5034", "started": 1}
+changed: [node0] => {"ansible_job_id": "313882042820.10882", "changed": true, "finished": 0, "results_file": "~/.ansible_async/313882042820.10882", "started": 1}
 
 PLAY RECAP *********************************************************************
 node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -356,7 +356,7 @@ PLAY [Leave Swarm] *************************************************************
 PLAY RECAP *********************************************************************
 node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -367,8 +367,8 @@ ok: [node2]
 ok: [node1]
 
 TASK [Init Workers] ************************************************************
-changed: [node2] => {"ansible_job_id": "9061233774.5145", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/9061233774.5145", "started": 1}
-changed: [node1] => {"ansible_job_id": "599461796657.5058", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/599461796657.5058", "started": 1}
+changed: [node2] => {"ansible_job_id": "9061233774.5145", "changed": true, "finished": 0, "results_file": "~/.ansible_async/9061233774.5145", "started": 1}
+changed: [node1] => {"ansible_job_id": "599461796657.5058", "changed": true, "finished": 0, "results_file": "~/.ansible_async/599461796657.5058", "started": 1}
 
 PLAY [Check Status of run] *****************************************************
 
@@ -378,7 +378,7 @@ PLAY RECAP *********************************************************************
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set uncore frequency] ****************************************************
 
@@ -399,7 +399,7 @@ node1                      : ok=3    changed=2    unreachable=0    failed=0    s
 node2                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 Nothing found in stack: microsuite
-Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+Using ~/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set profiler] ************************************************************
 
@@ -437,7 +437,7 @@ Traceback (most recent call last):
   File "run_experiment.py", line 432, in <module>
     main(sys.argv[1:])
   File "run_experiment.py", line 428, in main
-    run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+    run_multiple_experiments('~/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
   File "run_experiment.py", line 352, in run_multiple_experiments
     status = run_single_experiment(system_conf,root_results_dir, name_prefix, instance_conf, iter,bucket,midtier)
   File "run_experiment.py", line 272, in run_single_experiment

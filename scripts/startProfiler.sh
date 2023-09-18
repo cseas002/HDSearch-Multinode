@@ -86,7 +86,7 @@ done
 i=0
 for item in ${midtier_nodes[*]};
 do
-   echo "$item"
+    echo "$item"
     out=$(ssh $item "ps aux")
     midtier_pid[$i]=`echo "$out" | grep "mid_tier_server" | awk '{print $2}' | head -1`
     ((i=i+1))
@@ -95,23 +95,29 @@ done
 for i in "${!bucket_nodes[@]}";
 do
     echo "${bucket_pid[$i]}"
-    ssh ${bucket_nodes[$i]} "cd /users/cseas002/HDSearch-Multinode/profiler/; sudo /users/cseas002/HDSearch-Multinode/profiler/profiler.sh run_profiler $iteration ${bucket_pid[$i]}"
+    ssh ${bucket_nodes[$i]} "cd ~/HDSearch-Multinode/profiler/; sudo ~/HDSearch-Multinode/profiler/profiler.sh run_profiler $iteration ${bucket_pid[$i]}"
+    echo ${bucket_nodes[$i]}
 done
 
 for i in "${!midtier_nodes[@]}";
 do
-    ssh ${midtier_nodes[$i]} "cd /users/cseas002/HDSearch-Multinode/profiler/; sudo /users/cseas002/HDSearch-Multinode/profiler/profiler.sh run_profiler $iteration ${midtier_pid[$i]}"
-
+    echo ${midtier_nodes[$i]}
+    
+    ssh ${midtier_nodes[$i]} "cd ~/HDSearch-Multinode/profiler/; sudo ~/HDSearch-Multinode/profiler/profiler.sh run_profiler $iteration ${midtier_pid[$i]}"
+    
 done
 
 for item in ${bucket_nodes[*]};
 do
-    sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n $item start
+    sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n $item start
+    
+    echo $item
+    # exit
 done
 
 for item in ${midtier_nodes[*]};
 do
-    sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n $item start
+    sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n $item start
 done
 
 exit 0

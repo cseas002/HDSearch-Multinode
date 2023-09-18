@@ -3,7 +3,7 @@
 #!/bin/bash
 
 export ANSIBLE_HOST_KEY_CHECKING=False
-export PROFILER_HOME=/users/cseas002/HDSearch-Multinode/profiler
+export PROFILER_HOME=~/HDSearch-Multinode/profiler
 
 if [ -z $1 ]; then
   echo "wrong arguments pass number of nodes to monitor and range"

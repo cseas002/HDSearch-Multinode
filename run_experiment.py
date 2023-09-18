@@ -89,17 +89,17 @@ def stop_profiler(bucket,midtier):
         exec_command("sudo python3 profiler/profiler.py -n {} stop".format(node))
 
     for node in midtier:
-        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
+        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
 
 def report_profiler(bucket,midtier,results_dir_path):
     
     for node in bucket:
         dir_path = os.path.join(results_dir_path, "bucket_" + node)
-        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
     for node in midtier:
         dir_path = os.path.join(results_dir_path, "midtier_" + node)
-        exec_command("sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
 def kill_profiler(bucket,midtier):
     run_ansible_playbook(
@@ -164,7 +164,7 @@ def run_remote(client_conf):
 
     for i in range(0,3):
         key="NODE" + str(i)
-        os.environ[str(key)] = exec_command("ssh node{} hostname".format(i))[0]
+        os.environ[str(key)] = exec_command("ssh -A node{} hostname".format(i))[0]
     
     # Print the list of user's
     # environment variables
@@ -252,7 +252,7 @@ def configure_hdsearch_node(conf):
     return bucket,midtier
 
 def run_socwatch(name):  # Georgia you has an extra parameter here named "conf"
-    extravars = ['MONIT0R_TIME={}'.format("40"), 'OUTPUT_FILE={}'.format(name)]
+    extravars = ['MONITOR_TIME=40', 'OUTPUT_FILE={}'.format(name)]
     run_ansible_playbook(inventory='hosts', extravars=extravars, playbook='./ansible/profiler.yml', tags='run_socwatch')
 
 def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf, idx,bucket,midtier):
@@ -276,6 +276,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
         return profiler_output
     print("Profilerrrrr putput " + str(profiler_output))
     
+    # exit()
     # Added function 
     run_socwatch(name)
 
@@ -324,14 +325,16 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     return 0
 
 def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter):
-    bucket,midtier=configure_hdsearch_node(system_conf)
+    # bucket,midtier=configure_hdsearch_node(system_conf)
     install_script_run()
     set_profiler_hosts()
     leave_swarm()
     init_manager()
     init_worker()
    
-    time.sleep(500)
+    bucket = ['node2']
+    midtier = ['node1']
+    # time.sleep(500)
     name_prefix = "turbo={}-kernelconfig={}-{}-hyperthreading={}-".format(system_conf['turbo'], system_conf['kernelconfig'][0],system_conf['kernelconfig'][1],system_conf['ht'])
     request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
     root_results_dir = os.path.join(root_results_dir, batch_name)
@@ -425,7 +428,7 @@ def main(argv):
     batch_name = argv[0]
     for iter in range(0, 5):
         for system_conf in system_confs:
-            run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+            run_multiple_experiments('~/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
 
 
 if __name__ == '__main__':

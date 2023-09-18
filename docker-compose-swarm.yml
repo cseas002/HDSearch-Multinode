@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/cseas002/HDSearch-Multinode/microsuite_files/:/home/data
+        - ~/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     expose:
         - "50050"
@@ -32,7 +32,7 @@ services:
 #    stdin_open: true # docker run -i
 #    tty: true        # docker run -t
 #    volumes:
-#        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
 #    expose:
 #        - "50051"
 #    cap_add:
@@ -53,7 +53,7 @@ services:
 #    stdin_open: true # docker run -i
 #    tty: true        # docker run -t
 #    volumes:
-#        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
 #    expose:
 #        - "50052"
 #    cap_add:
@@ -74,7 +74,7 @@ services:
 #    stdin_open: true # docker run -i
 #    tty: true        # docker run -t
 #    volumes:
-#        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
 #    expose:
 #        - "50053"
 #    cap_add:
@@ -95,7 +95,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/cseas002/HDSearch-Multinode/microsuite_files/:/home/data
+        - ~/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     expose:
         - "50054"
@@ -132,7 +132,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - /users/cseas002/HDSearch-Multinode/microsuite_files/:/home/data
+        - ~/HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     cap_add:
         - SYS_PTRACE      

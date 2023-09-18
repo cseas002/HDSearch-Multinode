@@ -27,4 +27,16 @@
   - name: Kill remote profiler       
     ignore_errors: yes
     shell: cd ~/HDSearch-Multinode/profiler; sudo ./profiler.sh kill_profiler
+
+  - name: Run remote socwatch  
+  hosts: 
+  - bucket
+  - midtier  
+  tags:   
+  - run_socwatch  
+  tasks:  
+  - name: Run remote socwatch    
+    command: sudo /opt/intel/oneapi/vtune/2023.2.0/socwatch/x64/socwatch -s 60 -t {{ MONITOR_TIME }} -f cpu-cstate -m -r int -o {{ OUTPUT_FILE }}    
+    async: 10000     
+    poll: 0 
  
