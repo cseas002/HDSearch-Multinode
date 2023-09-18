@@ -337,6 +337,9 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     # time.sleep(500)
     name_prefix = "turbo={}-kernelconfig={}-{}-hyperthreading={}-".format(system_conf['turbo'], system_conf['kernelconfig'][0],system_conf['kernelconfig'][1],system_conf['ht'])
     request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
+
+    # I can change this list 
+    request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
