@@ -86,20 +86,20 @@ def run_profiler(id):
 def stop_profiler(bucket,midtier):
 
     for node in bucket:
-        exec_command("sudo python3 profiler/profiler.py -n {} stop".format(node))
+        exec_command("python3 profiler/profiler.py -n {} stop".format(node))
 
     for node in midtier:
-        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
+        exec_command("python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} stop".format(node))
 
 def report_profiler(bucket,midtier,results_dir_path):
     
     for node in bucket:
         dir_path = os.path.join(results_dir_path, "bucket_" + node)
-        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
     for node in midtier:
         dir_path = os.path.join(results_dir_path, "midtier_" + node)
-        exec_command("sudo python3 ~/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
+        exec_command("python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n {} report -d {}".format(node,dir_path))
 
 def kill_profiler(bucket,midtier):
     run_ansible_playbook(
@@ -336,10 +336,11 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     midtier = ['node1']
     # time.sleep(500)
     name_prefix = "turbo={}-kernelconfig={}-{}-hyperthreading={}-".format(system_conf['turbo'], system_conf['kernelconfig'][0],system_conf['kernelconfig'][1],system_conf['ht'])
-    request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
+    # request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
 
     # I can change this list 
-    request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
+    # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
+    request_qps = [0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
@@ -364,8 +365,6 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     leave_swarm()
 
 def main(argv):
-
-
     # kernelconfig first argument is for midtier and second for bucket server
     system_confs = [
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': False},
@@ -381,6 +380,7 @@ def main(argv):
           #{'turbo': False, 'kernelconfig': ['disable_c6', 'disable_cstates'], 'ht': False},
           #{'turbo': False, 'kernelconfig': ['disable_c1e_c6', 'disable_cstates'], 'ht': False}
     ]
+    
     client_conf = common.Configuration({
         'dataset_filepath': '/home/image_feature_vectors.dat',
         'result_filepath': './results',
