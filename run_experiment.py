@@ -74,7 +74,7 @@ def set_profiler_hosts():
 
 def run_profiler(id):
     extravars = [
-        'HOST_FILE={}'.format("~/HDSearch-Multinode/hosts"),
+        'HOST_FILE={}'.format("/users/cseas002/HDSearch-Multinode/hosts"),
         'ITERATION={}'.format(id)]
     status_output=run_ansible_playbook(
         inventory='hosts', 
@@ -170,12 +170,12 @@ def run_remote(client_conf):
     # environment variables
     
     #start microservice
-    rc = os.system("cd ~/HDSearch-Multinode/; sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite")
-    #exec_command("cd ~/HDSearch-Multinode; sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite >> /local/logs/setup_node_swarm.log  2>&1")
+    rc = os.system("cd /users/cseas002/HDSearch-Multinode/; sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite")
+    #exec_command("cd /users/cseas002/HDSearch-Multinode; sudo docker stack deploy --compose-file=docker-compose-swarm.yml microsuite >> /local/logs/setup_node_swarm.log  2>&1")
     
 def kill_remote():
-    rc = os.system('ssh -n node0 "cd ~/HDSearch-Multinode; sudo docker stack rm microsuite"')
-    #exec_command("cd ~/HDSearch-Multinode; sudo docker stack rm microsuite")  
+    rc = os.system('ssh -n node0 "cd /users/cseas002/HDSearch-Multinode; sudo docker stack rm microsuite"')
+    #exec_command("cd /users/cseas002/HDSearch-Multinode; sudo docker stack rm microsuite")  
 
 def host_is_reachable(host):
     return True if os.system("ping -c 1 {}".format(host)) == 0 else False
@@ -206,8 +206,8 @@ def configure_hdsearch_node(conf):
     bucket,midtier = hdsearch_node()
     print(str(bucket) + str(midtier))
     for node in bucket:
-        print('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
-        rc = os.system('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
+        print('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
+        rc = os.system('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
         exit_status = rc >> 8 
         if exit_status == 2:
             logging.info('Rebooting remote host {}...'.format(node))
@@ -218,17 +218,17 @@ def configure_hdsearch_node(conf):
                 logging.info('Waiting for remote host {}...'.format(node))
                 time.sleep(30)
                 pass
-            os.system('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
+            os.system('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][1]))
             if conf['ht'] == False:
                 os.system('ssh -n {} "echo "forceoff" | sudo tee /sys/devices/system/cpu/smt/control"'.format(node))
             os.system('ssh -n {} "sudo cpupower frequency-set -g performance"'.format(node))
             os.system('ssh -n {} "echo "0" | sudo tee /proc/sys/kernel/nmi_watchdog"'.format(node))
             
             if conf['turbo'] == False:
-                os.system('ssh -n {} "~/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
+                os.system('ssh -n {} "/users/cseas002/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
     for node in midtier:
-        print('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
-        rc = os.system('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
+        print('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
+        rc = os.system('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
         exit_status = rc >> 8 
         if exit_status == 2:
             logging.info('Rebooting remote host {}...'.format(node))
@@ -239,7 +239,7 @@ def configure_hdsearch_node(conf):
                 logging.info('Waiting for remote host {}...'.format(node))
                 time.sleep(30)
                 pass
-            os.system('ssh -n {} "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
+            os.system('ssh -n {} "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo={} --kernelconfig={} -v"'.format(node, conf['turbo'], conf['kernelconfig'][0]))
             if conf['ht'] == False:
                 os.system('ssh -n {} "echo "forceoff" | sudo tee /sys/devices/system/cpu/smt/control"'.format(node))
             os.system('ssh -n {} "sudo cpupower frequency-set -g performance"'.format(node))
@@ -248,7 +248,7 @@ def configure_hdsearch_node(conf):
             os.system('ssh -n {} "echo "0" | sudo tee /proc/sys/kernel/nmi_watchdog"'.format(node))
             
             if conf['turbo'] == False:
-                os.system('ssh -n {} "~/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
+                os.system('ssh -n {} "/users/cseas002/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
     return bucket,midtier
 
 def run_socwatch(name):  # Georgia you has an extra parameter here named "conf"
@@ -278,7 +278,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     
     # exit()
     # Added function 
-    run_socwatch(name)
+    # run_socwatch(name)
 
     run_output = run_ansible_playbook(
         inventory='hosts', 
@@ -296,18 +296,18 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     # Calling script
 
     # For midtier
-    while True:
-        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
-        if (int(active_socwatch[0]) > 2):
-            break
-        time.sleep(30)
+    # while True:
+    #     active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
+    #     if (int(active_socwatch[0]) > 2):
+    #         break
+    #     time.sleep(30)
     
-    # For bucket
-    while True:
-        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
-        if (int(active_socwatch[0]) > 2):
-            break
-        time.sleep(30)
+    # # For bucket
+    # while True:
+    #     active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
+    #     if (int(active_socwatch[0]) > 2):
+    #         break
+    #     time.sleep(30)
 
 
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
@@ -431,7 +431,7 @@ def main(argv):
     batch_name = argv[0]
     for iter in range(0, 5):
         for system_conf in system_confs:
-            run_multiple_experiments('~/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+            run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
 
 
 if __name__ == '__main__':
