@@ -5,7 +5,7 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     volumes:
-        - ~/HDSearch-Multinode/microsuite_files/:/home/data
+        - /users/cseas002//HDSearch-Multinode/microsuite_files/:/home/data
         - /mydata/HDSearch/:/home/
     expose:
         - "50050"
@@ -23,10 +23,10 @@ services:
         bash -c "#wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
                 mv image_feature_vectors.dat /home
                 cd /MicroSuite/src/HDSearch/bucket_service/service
-                taskset -c 0,1,2,3,4 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50050 2 10 0 4 &
-                taskset -c 5,6,7,8,9 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 10 1 4 &
-                taskset -c 10,11,12,13,14 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 10 2 4 &
-                taskset -c 15,16,17,18,19 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 10 3 4"
+                taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50050 2 1 0 4 &
+                taskset -c 5 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 1 1 4 &
+                taskset -c 10 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 1 2 4 &
+                taskset -c 15 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 1 3 4"
 #  bucket2:
 #    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
 #    stdin_open: true # docker run -i
@@ -124,7 +124,7 @@ services:
                 echo "bucket:50051" >> bucket_servers_IP.txt
                 echo "bucket:50052" >> bucket_servers_IP.txt
                 echo "bucket:50053" >> bucket_servers_IP.txt
-                taskset -c 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 ./mid_tier_server 1 13 1 4 bucket_servers_IP.txt /home/image_feature_vectors.dat 2 0.0.0.0:50054 1 4 32 0"
+                taskset -c 1 ./mid_tier_server 1 13 1 4 bucket_servers_IP.txt /home/image_feature_vectors.dat 2 0.0.0.0:50054 1 1 1 0"
   client:
     image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
     #networks:
@@ -162,7 +162,7 @@ services:
                 echo 'profilers launched'
                 cd /MicroSuite/src/HDSearch/load_generator
                 mkdir ./results
-                ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 500 midtier:50054 dummy1 dummy2 dummy3"
+                ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 0.01 midtier:50054 dummy1 dummy2 dummy3"
 #networks:
 #  outside:
 #    external:

@@ -1,0 +1,422 @@
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Install HDSearch] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+
+PLAY [Set Up Docker Curl] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node0 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node0]
+
+PLAY [Make space to commit] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [Make Space to Commit Image] **********************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node2] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.779358", "end": "2023-09-28 04:47:30.700105", "rc": 0, "start": "2023-09-28 04:47:29.920747", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.874877", "end": "2023-09-28 04:47:30.801916", "rc": 0, "start": "2023-09-28 04:47:29.927039", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node0] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.905472", "end": "2023-09-28 04:47:30.832141", "rc": 0, "start": "2023-09-28 04:47:29.926669", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+
+PLAY [Install Profiler Dep] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+
+TASK [Set profiler Hosts] ******************************************************
+changed: [node2] => {"ansible_job_id": "508155914604.34317", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/508155914604.34317", "started": 1}
+changed: [node1] => {"ansible_job_id": "406615057660.8438", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/406615057660.8438", "started": 1}
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node0 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node0]
+
+TASK [Leave Swarm] *************************************************************
+changed: [node2] => {"ansible_job_id": "961603352898.34467", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/961603352898.34467", "started": 1}
+changed: [node1] => {"ansible_job_id": "566100556546.8583", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/566100556546.8583", "started": 1}
+changed: [node0] => {"ansible_job_id": "597427897863.1987", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/597427897863.1987", "started": 1}
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node0 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node0]
+
+TASK [Init Master] *************************************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node0] => {"changed": true, "cmd": "sudo docker swarm init --advertise-addr 10.10.1.1", "delta": "0:00:00.700475", "end": "2023-09-28 04:47:45.083008", "rc": 0, "start": "2023-09-28 04:47:44.382533", "stderr": "", "stderr_lines": [], "stdout": "Swarm initialized: current node (vxepmsx28a58xyua3f4zykvgq) is now a manager.\n\nTo add a worker to this swarm, run the following command:\n\n    docker swarm join --token SWMTKN-1-43nnxx8afi967wbnc7nvmqoshw7qmlvnjv1s23rgfwnrs1ofhc-7rhxlrhgzs7gg0ofrg53qtcmn 10.10.1.1:2377\n\nTo add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.", "stdout_lines": ["Swarm initialized: current node (vxepmsx28a58xyua3f4zykvgq) is now a manager.", "", "To add a worker to this swarm, run the following command:", "", "    docker swarm join --token SWMTKN-1-43nnxx8afi967wbnc7nvmqoshw7qmlvnjv1s23rgfwnrs1ofhc-7rhxlrhgzs7gg0ofrg53qtcmn 10.10.1.1:2377", "", "To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions."]}
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+
+TASK [Init Workers] ************************************************************
+changed: [node1] => {"ansible_job_id": "283758699673.8727", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/283758699673.8727", "started": 1}
+changed: [node2] => {"ansible_job_id": "743280132578.34618", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/743280132578.34618", "started": 1}
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Set uncore frequency] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+
+TASK [Load msr kernel module] **************************************************
+changed: [node2] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.008013", "end": "2023-09-28 04:47:52.420123", "rc": 0, "start": "2023-09-28 04:47:52.412110", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.007760", "end": "2023-09-28 04:47:52.426314", "rc": 0, "start": "2023-09-28 04:47:52.418554", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [Set uncore freq] *********************************************************
+changed: [node2] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.006339", "end": "2023-09-28 04:47:52.926610", "rc": 0, "start": "2023-09-28 04:47:52.920271", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.006767", "end": "2023-09-28 04:47:52.944723", "rc": 0, "start": "2023-09-28 04:47:52.937956", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Nothing found in stack: microsuite
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+
+INFO:root:ssh -A node0 hostname
+INFO:root:node0.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node1 hostname
+INFO:root:node1.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node2 hostname
+INFO:root:node2.hdsearch2.ramp-pg0.wisc.cloudlab.us
+Ignoring deprecated options:
+
+expose: Exposing ports is unnecessary - services on the same network can access each other's containers on any port.
+
+Creating network microsuite_default
+Creating service microsuite_bucket
+Creating service microsuite_midtier
+Creating service microsuite_client
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node0 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node0]
+
+TASK [Run remote profiler] *****************************************************
+changed: [node0] => {"changed": true, "cmd": "~/HDSearch-Multinode/scripts/startProfiler.sh /users/cseas002/HDSearch-Multinode/hosts 0", "delta": "0:15:10.892120", "end": "2023-09-28 05:03:28.114665", "rc": 0, "start": "2023-09-28 04:48:17.222545", "stderr": "[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use \n/usr/bin/python3, but is using /usr/bin/python for backward compatibility with \nprior Ansible releases. A future Ansible release will default to using the \ndiscovered platform python for this host. See https://docs.ansible.com/ansible/\n2.9/reference_appendices/interpreter_discovery.html for more information. This \nfeature will be removed in version 2.12. Deprecation warnings can be disabled \nby setting deprecation_warnings=False in ansible.cfg.\n[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use \n/usr/bin/python3, but is using /usr/bin/python for backward compatibility with \nprior Ansible releases. A future Ansible release will default to using the \ndiscovered platform python for this host. See https://docs.ansible.com/ansible/\n2.9/reference_appendices/interpreter_discovery.html for more information. This \nfeature will be removed in version 2.12. Deprecation warnings can be disabled \nby setting deprecation_warnings=False in ansible.cfg.\nssh: Could not resolve hostname cd ~/hdsearch-multinode/profiler/; sudo ~/hdsearch-multinode/profiler/profiler.sh run_profiler 0 : Name or service not known", "stderr_lines": ["[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use ", "/usr/bin/python3, but is using /usr/bin/python for backward compatibility with ", "prior Ansible releases. A future Ansible release will default to using the ", "discovered platform python for this host. See https://docs.ansible.com/ansible/", "2.9/reference_appendices/interpreter_discovery.html for more information. This ", "feature will be removed in version 2.12. Deprecation warnings can be disabled ", "by setting deprecation_warnings=False in ansible.cfg.", "[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use ", "/usr/bin/python3, but is using /usr/bin/python for backward compatibility with ", "prior Ansible releases. A future Ansible release will default to using the ", "discovered platform python for this host. See https://docs.ansible.com/ansible/", "2.9/reference_appendices/interpreter_discovery.html for more information. This ", "feature will be removed in version 2.12. Deprecation warnings can be disabled ", "by setting deprecation_warnings=False in ansible.cfg.", "ssh: Could not resolve hostname cd ~/hdsearch-multinode/profiler/; sudo ~/hdsearch-multinode/profiler/profiler.sh run_profiler 0 : Name or service not known"], "stdout": "/users/cseas002/HDSearch-Multinode/hosts\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nnode1\n35487\nUsing /etc/ansible/ansible.cfg as config file\n\nPLAY [Run remote profiler] *****************************************************\n\nTASK [Gathering Facts] *********************************************************\nok: [node2]\n\nTASK [Run remote profiler] *****************************************************\nchanged: [node2] => {\"ansible_job_id\": \"910266246916.36075\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/910266246916.36075\", \"started\": 1}\n\nTASK [Check remote profiler] ***************************************************\nok: [node2] => {\"ansible_job_id\": \"910266246916.36075\", \"changed\": false, \"finished\": 0, \"started\": 1}\n\nPLAY [Kill remote profiler] ****************************************************\n\nPLAY RECAP *********************************************************************\nnode2                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   \n\nnode2\nnode1\nUsing /etc/ansible/ansible.cfg as config file\n\nPLAY [Run remote profiler] *****************************************************\n\nTASK [Gathering Facts] *********************************************************\nok: [node1]\n\nTASK [Run remote profiler] *****************************************************\nchanged: [node1] => {\"ansible_job_id\": \"488875008862.10250\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/488875008862.10250\", \"started\": 1}\n\nTASK [Check remote profiler] ***************************************************\nok: [node1] => {\"ansible_job_id\": \"488875008862.10250\", \"changed\": false, \"finished\": 0, \"started\": 1}\n\nPLAY [Kill remote profiler] ****************************************************\n\nPLAY RECAP *********************************************************************\nnode1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   \n\n\nnode2", "stdout_lines": ["/users/cseas002/HDSearch-Multinode/hosts", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "node1", "35487", "Using /etc/ansible/ansible.cfg as config file", "", "PLAY [Run remote profiler] *****************************************************", "", "TASK [Gathering Facts] *********************************************************", "ok: [node2]", "", "TASK [Run remote profiler] *****************************************************", "changed: [node2] => {\"ansible_job_id\": \"910266246916.36075\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/910266246916.36075\", \"started\": 1}", "", "TASK [Check remote profiler] ***************************************************", "ok: [node2] => {\"ansible_job_id\": \"910266246916.36075\", \"changed\": false, \"finished\": 0, \"started\": 1}", "", "PLAY [Kill remote profiler] ****************************************************", "", "PLAY RECAP *********************************************************************", "node2                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   ", "", "node2", "node1", "Using /etc/ansible/ansible.cfg as config file", "", "PLAY [Run remote profiler] *****************************************************", "", "TASK [Gathering Facts] *********************************************************", "ok: [node1]", "", "TASK [Run remote profiler] *****************************************************", "changed: [node1] => {\"ansible_job_id\": \"488875008862.10250\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/488875008862.10250\", \"started\": 1}", "", "TASK [Check remote profiler] ***************************************************", "ok: [node1] => {\"ansible_job_id\": \"488875008862.10250\", \"changed\": false, \"finished\": 0, \"started\": 1}", "", "PLAY [Kill remote profiler] ****************************************************", "", "PLAY RECAP *********************************************************************", "node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   ", "", "", "node2"]}
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node1]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node2]
+
+TASK [Run remote socwatch] *****************************************************
+changed: [node2] => {"ansible_job_id": "529709129647.36304", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/529709129647.36304", "started": 1}
+changed: [node1] => {"ansible_job_id": "845477175189.10479", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/845477175189.10479", "started": 1}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ [WARNING] Ansible is being run in a world writable directory (/users/cseas002/HDSearch-Multinode), ignoring it as an ansible.cfg source. For more information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node0 should use 
+/usr/bin/python3, but is using /usr/bin/python for backward compatibility with 
+prior Ansible releases. A future Ansible release will default to using the 
+discovered platform python for this host. See https://docs.ansible.com/ansible/
+2.9/reference_appendices/interpreter_discovery.html for more information. This 
+feature will be removed in version 2.12. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+ok: [node0]
+
+TASK [Check Status] ************************************************************
+changed: [node0] => {"changed": true, "cmd": "~/HDSearch-Multinode/scripts/check-run-status.sh", "delta": "0:01:42.875074", "end": "2023-09-28 05:05:17.938837", "rc": 0, "start": "2023-09-28 05:03:35.063763", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+INFO:root:python3 profiler/profiler.py -n node2 stop
+INFO:root:python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n node1 stop
+INFO:root:python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n node2 report -d /users/cseas002/data/NINTH_RUN/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=0.01-0/hdsearch/bucket_node2
+INFO:root:python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n node1 report -d /users/cseas002/data/NINTH_RUN/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=0.01-0/hdsearch/midtier_node1
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2

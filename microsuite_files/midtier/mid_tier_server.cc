@@ -818,15 +818,15 @@ class DistanceServiceClient {
                 response_threads.emplace_back(std::thread(ProcessResponses));
             }
 
-            std::thread kill_ack = std::thread(FinalKill);
-            std::thread perf(Perf);
-            std::thread syscount(SysCount);
-            std::thread hardirqs(Hardirqs);
-            std::thread wakeuptime(Wakeuptime);
-            std::thread softirqs(Softirqs);
-            std::thread runqlat(Runqlat);
-            //std::thread hitm(Hitm);
-            std::thread tcpretrans(Tcpretrans);
+            // std::thread kill_ack = std::thread(FinalKill);
+            // std::thread perf(Perf);
+            // std::thread syscount(SysCount);
+            // std::thread hardirqs(Hardirqs);
+            // std::thread wakeuptime(Wakeuptime);
+            // std::thread softirqs(Softirqs);
+            // std::thread runqlat(Runqlat);
+            // //std::thread hitm(Hitm);
+            // std::thread tcpretrans(Tcpretrans);
 
 
             server = new ServerImpl();
@@ -836,14 +836,14 @@ class DistanceServiceClient {
                 response_threads[i].join();
             }
 
-            kill_ack.join();
-            perf.join();
-            syscount.join();
-            hardirqs.join();
-            wakeuptime.join();
-            softirqs.join();
-            runqlat.join();
-            //hitm.join();
-            tcpretrans.join();
+            // kill_ack.join();
+            // perf.join();
+            // syscount.join();
+            // hardirqs.join();
+            // wakeuptime.join();
+            // softirqs.join();
+            // runqlat.join();
+            // //hitm.join();
+            // tcpretrans.join();
             return 0;
         }

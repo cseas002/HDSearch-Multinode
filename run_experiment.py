@@ -278,7 +278,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     
     # exit()
     # Added function 
-    # run_socwatch(name)
+    run_socwatch(name)
 
     run_output = run_ansible_playbook(
         inventory='hosts', 
@@ -296,18 +296,21 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     # Calling script
 
     # For midtier
-    # while True:
-    #     active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
-    #     if (int(active_socwatch[0]) > 2):
-    #         break
-    #     time.sleep(30)
+    while True:
+        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
+        if (int(active_socwatch[0]) < 3): # Check whether socwatch is running 
+            # (there should be 2 lines if it's not running: 
+            # bash -c ps aux | grep socwatch 
+            # grep socwatch)
+            break
+        time.sleep(30)
     
-    # # For bucket
-    # while True:
-    #     active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
-    #     if (int(active_socwatch[0]) > 2):
-    #         break
-    #     time.sleep(30)
+    # For bucket
+    while True:
+        active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
+        if (int(active_socwatch[0]) < 3):  
+            break
+        time.sleep(30)
 
 
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
