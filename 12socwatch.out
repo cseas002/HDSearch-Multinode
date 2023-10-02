@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "run_experiment.py", line 441, in <module>
+    main(sys.argv[1:])
+  File "run_experiment.py", line 433, in main
+    raise Exception("Experiment name is missing")
+Exception: Experiment name is missing

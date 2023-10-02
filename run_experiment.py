@@ -343,7 +343,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [0.01, 0.05, 0.1, 0.2, 0.5, 1, 2, 5]
+    request_qps = [0.01, 0.05, 0.1]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
