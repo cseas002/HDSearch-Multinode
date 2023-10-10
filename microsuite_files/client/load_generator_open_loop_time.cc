@@ -296,8 +296,9 @@ int main(int argc, char** argv) {
 
     //Declare the poisson distribution
     std::default_random_engine generator;
-    std::poisson_distribution<int> distribution(center);
-    double next_time = distribution(generator) + curr_time;
+    // CHANGE
+    // std::poisson_distribution<int> distribution(center);
+    double next_time = curr_time + center; //distribution(generator) + curr_time;
   
     //!!!!!!!WarmUp Phase!!!!!!
     
@@ -330,7 +331,8 @@ int main(int argc, char** argv) {
                         false,
                         false);
             }
-            next_time = distribution(generator) + curr_time;
+            // CHANGE
+            next_time = curr_time + center; //distribution(generator) + curr_time;
             index = rand() % queries_size;
 
             query.SetPoint(0, queries.GetPointAtIndex(index));
@@ -347,17 +349,22 @@ int main(int argc, char** argv) {
     std::cout << "# Requests: " << num_requests->AtomicallyReadCount() << " \n";
     std::cout << "# Responses: " << responses_recvd->AtomicallyReadCount() << " \n";
     std::cout << "!!!!!!!End of Warmup Period!!!!!!!" << " \n";
-  
+    
+    // std::uniform_int_distribution<> distribution_run(center);
+
     center = 1000000.0/(double)(qps);
     //Declare the poisson distribution
     std::default_random_engine generator_run;
-    std::poisson_distribution<int> distribution_run(center);
+    // CHANGE
+    // std::poisson_distribution<int> distribution_run(center);
    
     curr_time = (double)GetTimeInMicro();
     exit_time = curr_time + (double)(time_duration*1000000);
-    next_time = distribution_run(generator_run) + curr_time;
+    next_time = curr_time + center; //distribution_run(generator_run) + curr_time;
+    // The next time is the current + center
     index = rand() % queries_size;
     //!!!!!!!Actual Run !!!!!!!
+    printf("Next time = %lf\n", next_time);
  
     while (curr_time < exit_time) 
     {

@@ -270,7 +270,9 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     
     #run_profiler
     run_remote(client_conf)
-    profiler_output = run_profiler(idx)
+    profiler_output = 0
+    # COMMENTED OUT THIS LINE AND REPLACED IT WITH THE LINE ABOVE
+    # profiler_output = run_profiler(idx)
     
     if profiler_output != 0:
         return profiler_output
@@ -289,8 +291,9 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
         return run_output
     
 
-    stop_profiler(bucket,midtier)
-    report_profiler(bucket,midtier,hdsearch_results_dir_path)
+    # COMMENTED OUT THESE TWO LINES
+    # stop_profiler(bucket,midtier)
+    # report_profiler(bucket,midtier,hdsearch_results_dir_path)
     
     
     # Calling script
@@ -343,7 +346,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [0.01, 0.05, 0.1]
+    request_qps = [0.01]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
