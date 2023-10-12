@@ -26,7 +26,7 @@
   tasks:
   - name: Check Status      
     ignore_errors: yes
-    shell: ~/HDSearch-Multinode/scripts/check-run-status.sh
+    shell: /users/cseas002/HDSearch-Multinode/scripts/check-run-status.sh
 
 - name: Leave Swarm
   hosts:

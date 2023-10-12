@@ -256,7 +256,7 @@ core 16: disabled
 core 17: disabled
 core 18: disabled
 core 19: disabled
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Install HDSearch] ********************************************************
 
@@ -281,9 +281,9 @@ ok: [node2]
 TASK [Make Space to Commit Image] **********************************************
 [WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
 than running sudo
-changed: [node1] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.461647", "end": "2023-09-13 17:29:15.231881", "rc": 0, "start": "2023-09-13 17:29:14.770234", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\numount: /var/lib/docker: not mounted.", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "umount: /var/lib/docker: not mounted."], "stdout": "", "stdout_lines": []}
-changed: [node2] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.576245", "end": "2023-09-13 17:29:15.343544", "rc": 0, "start": "2023-09-13 17:29:14.767299", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\numount: /var/lib/docker: not mounted.", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "umount: /var/lib/docker: not mounted."], "stdout": "", "stdout_lines": []}
-changed: [node0] => {"changed": true, "cmd": ["sudo", "~/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:07.603967", "end": "2023-09-13 17:29:21.809901", "rc": 0, "start": "2023-09-13 17:29:14.205934", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory '/dev/mkdocker': File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory '/dev/mkdocker': File exists"], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.461647", "end": "2023-09-13 17:29:15.231881", "rc": 0, "start": "2023-09-13 17:29:14.770234", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\numount: /var/lib/docker: not mounted.", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "umount: /var/lib/docker: not mounted."], "stdout": "", "stdout_lines": []}
+changed: [node2] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.576245", "end": "2023-09-13 17:29:15.343544", "rc": 0, "start": "2023-09-13 17:29:14.767299", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\numount: /var/lib/docker: not mounted.", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "umount: /var/lib/docker: not mounted."], "stdout": "", "stdout_lines": []}
+changed: [node0] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:07.603967", "end": "2023-09-13 17:29:21.809901", "rc": 0, "start": "2023-09-13 17:29:14.205934", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory '/dev/mkdocker': File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory '/dev/mkdocker': File exists"], "stdout": "", "stdout_lines": []}
 
 PLAY [Install Profiler Dep] ****************************************************
 
@@ -292,7 +292,7 @@ node0                      : ok=3    changed=1    unreachable=0    failed=0    s
 node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set profiler] ************************************************************
 
@@ -301,8 +301,8 @@ ok: [node2]
 ok: [node1]
 
 TASK [Set profiler Hosts] ******************************************************
-changed: [node2] => {"ansible_job_id": "120523132015.4933", "changed": true, "finished": 0, "results_file": "~/.ansible_async/120523132015.4933", "started": 1}
-changed: [node1] => {"ansible_job_id": "248859722361.4827", "changed": true, "finished": 0, "results_file": "~/.ansible_async/248859722361.4827", "started": 1}
+changed: [node2] => {"ansible_job_id": "120523132015.4933", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/120523132015.4933", "started": 1}
+changed: [node1] => {"ansible_job_id": "248859722361.4827", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/248859722361.4827", "started": 1}
 
 PLAY [Run remote profiler] *****************************************************
 
@@ -312,7 +312,7 @@ PLAY RECAP *********************************************************************
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -328,16 +328,16 @@ ok: [node2]
 ok: [node0]
 
 TASK [Leave Swarm] *************************************************************
-changed: [node1] => {"ansible_job_id": "234289552281.4936", "changed": true, "finished": 0, "results_file": "~/.ansible_async/234289552281.4936", "started": 1}
-changed: [node2] => {"ansible_job_id": "350454364081.5042", "changed": true, "finished": 0, "results_file": "~/.ansible_async/350454364081.5042", "started": 1}
-changed: [node0] => {"ansible_job_id": "851605183148.19783", "changed": true, "finished": 0, "results_file": "~/.ansible_async/851605183148.19783", "started": 1}
+changed: [node1] => {"ansible_job_id": "234289552281.4936", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/234289552281.4936", "started": 1}
+changed: [node2] => {"ansible_job_id": "350454364081.5042", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/350454364081.5042", "started": 1}
+changed: [node0] => {"ansible_job_id": "851605183148.19783", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/851605183148.19783", "started": 1}
 
 PLAY RECAP *********************************************************************
 node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -358,7 +358,7 @@ PLAY [Leave Swarm] *************************************************************
 PLAY RECAP *********************************************************************
 node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Initialize cluster manager] **********************************************
 
@@ -369,8 +369,8 @@ ok: [node2]
 ok: [node1]
 
 TASK [Init Workers] ************************************************************
-changed: [node1] => {"ansible_job_id": "514300528999.5060", "changed": true, "finished": 0, "results_file": "~/.ansible_async/514300528999.5060", "started": 1}
-changed: [node2] => {"ansible_job_id": "756357512074.5154", "changed": true, "finished": 0, "results_file": "~/.ansible_async/756357512074.5154", "started": 1}
+changed: [node1] => {"ansible_job_id": "514300528999.5060", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/514300528999.5060", "started": 1}
+changed: [node2] => {"ansible_job_id": "756357512074.5154", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/756357512074.5154", "started": 1}
 
 PLAY [Check Status of run] *****************************************************
 
@@ -380,7 +380,7 @@ PLAY RECAP *********************************************************************
 node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set uncore frequency] ****************************************************
 
@@ -402,7 +402,7 @@ node1                      : ok=3    changed=2    unreachable=0    failed=0    s
 node2                      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
 
 Nothing found in stack: microsuite
-Using ~/HDSearch-Multinode/ansible.cfg as config file
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
 
 PLAY [Set profiler] ************************************************************
 
@@ -418,7 +418,7 @@ ok: [node1]
 fatal: [node2]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"node2\". Make sure this host can be reached over ssh: ssh: connect to host node2 port 22: No route to host\r\n", "unreachable": true}
 
 TASK [Kill remote profiler] ****************************************************
-fatal: [node1]: FAILED! => {"changed": true, "cmd": "cd ~/HDSearch-Multinode/profiler; sudo ./profiler.sh kill_profiler", "delta": "0:00:00.810111", "end": "2023-09-13 17:38:12.639934", "msg": "non-zero return code", "rc": 4, "start": "2023-09-13 17:38:11.829823", "stderr": "ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:\nJSON: No JSON object could be decoded\n\nSyntax Error while loading YAML.\n  could not find expected ':'\n\nThe error appears to be in '~/HDSearch-Multinode/profiler/ansible/profiler.yml': line 31, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n  -bucket\n  -midtier\n  ^ here", "stderr_lines": ["ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:", "JSON: No JSON object could be decoded", "", "Syntax Error while loading YAML.", "  could not find expected ':'", "", "The error appears to be in '~/HDSearch-Multinode/profiler/ansible/profiler.yml': line 31, column 3, but may", "be elsewhere in the file depending on the exact syntax problem.", "", "The offending line appears to be:", "", "  -bucket", "  -midtier", "  ^ here"], "stdout": "Using /etc/ansible/ansible.cfg as config file", "stdout_lines": ["Using /etc/ansible/ansible.cfg as config file"]}
+fatal: [node1]: FAILED! => {"changed": true, "cmd": "cd /users/cseas002/HDSearch-Multinode/profiler; sudo ./profiler.sh kill_profiler", "delta": "0:00:00.810111", "end": "2023-09-13 17:38:12.639934", "msg": "non-zero return code", "rc": 4, "start": "2023-09-13 17:38:11.829823", "stderr": "ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:\nJSON: No JSON object could be decoded\n\nSyntax Error while loading YAML.\n  could not find expected ':'\n\nThe error appears to be in '/users/cseas002/HDSearch-Multinode/profiler/ansible/profiler.yml': line 31, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n  -bucket\n  -midtier\n  ^ here", "stderr_lines": ["ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:", "JSON: No JSON object could be decoded", "", "Syntax Error while loading YAML.", "  could not find expected ':'", "", "The error appears to be in '/users/cseas002/HDSearch-Multinode/profiler/ansible/profiler.yml': line 31, column 3, but may", "be elsewhere in the file depending on the exact syntax problem.", "", "The offending line appears to be:", "", "  -bucket", "  -midtier", "  ^ here"], "stdout": "Using /etc/ansible/ansible.cfg as config file", "stdout_lines": ["Using /etc/ansible/ansible.cfg as config file"]}
 ...ignoring
 
 PLAY RECAP *********************************************************************
@@ -432,8 +432,8 @@ INFO:root:node1.hdsearch2.ramp-pg0.wisc.cloudlab.us
 INFO:root:ssh -A node2 hostname
 INFO:root:ssh: connect to host node2 port 22: No route to host
 ['node2']['node1']
-ssh -n node2 "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
-ssh -n node1 "cd ~/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
+ssh -n node2 "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
+ssh -n node1 "cd /users/cseas002/HDSearch-Multinode; sudo python3 configure.py -v --turbo=False --kernelconfig=baseline -v"
 ansible-playbook -v -i hosts -e "" --tags "setup_docker" ansible/install.yml
 ansible-playbook -v -i hosts -e "" --tags "set_profiler_hosts" ansible/profiler.yml
 ansible-playbook -v -i hosts -e "" --tags "leave_swarm" ansible/hdsearch.yml
@@ -445,7 +445,7 @@ Traceback (most recent call last):
   File "run_experiment.py", line 432, in <module>
     main(sys.argv[1:])
   File "run_experiment.py", line 428, in main
-    run_multiple_experiments('~/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+    run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
   File "run_experiment.py", line 352, in run_multiple_experiments
     status = run_single_experiment(system_conf,root_results_dir, name_prefix, instance_conf, iter,bucket,midtier)
   File "run_experiment.py", line 272, in run_single_experiment

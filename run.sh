@@ -32,7 +32,7 @@ sudo apt install pciutils-dev
 make -C tools/power/cpupower
 
 
-ssh -n node1 'cd ~/mcperf; sudo python3 configure.py -v --kernelconfig=baseline -v'
+ssh -n node1 'cd /users/cseas002/mcperf; sudo python3 configure.py -v --kernelconfig=baseline -v'
 
 
 
@@ -86,7 +86,7 @@ do
 scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-cd ~/HDSearch-Multinode/
+cd /users/cseas002/HDSearch-Multinode/
 bash hdsearch-multinode.sh build_install
 
 # Socwatch

@@ -7,7 +7,7 @@
   - set_profiler_hosts
   tasks:
   - name: Set profiler Hosts
-    shell: cd ~/HDSearch-Multinode/profiler; ./setHosts.sh 1 $(hostname | awk -F"." '{print $1}' | sed 's/node//g') $(hostname | awk -F"." '{print $1}' | sed 's/node//g')
+    shell: cd /users/cseas002/HDSearch-Multinode/profiler; ./setHosts.sh 1 $(hostname | awk -F"." '{print $1}' | sed 's/node//g') $(hostname | awk -F"." '{print $1}' | sed 's/node//g')
     async: 10000 
     poll: 0
 - name: Run remote profiler
@@ -16,7 +16,7 @@
   - run_profiler
   tasks:
   - name: Run remote profiler
-    shell: ~/HDSearch-Multinode/scripts/startProfiler.sh {{ HOST_FILE }} {{ ITERATION }}
+    shell: /users/cseas002/HDSearch-Multinode/scripts/startProfiler.sh {{ HOST_FILE }} {{ ITERATION }}
 - name: Kill remote profiler
   hosts: 
   - bucket
@@ -26,7 +26,7 @@
   tasks:
   - name: Kill remote profiler       
     ignore_errors: yes
-    shell: cd ~/HDSearch-Multinode/profiler; sudo ./profiler.sh kill_profiler
+    shell: cd /users/cseas002/HDSearch-Multinode/profiler; sudo ./profiler.sh kill_profiler
 
   - name: Run remote socwatch  
   hosts: 

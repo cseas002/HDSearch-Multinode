@@ -170,7 +170,7 @@ make -C tools/power/cpupower
 ## Configuring kernel
 
 ```
-ssh -n node1 'cd ~/mcperf; sudo python3 configure.py -v --kernelconfig=baseline -v'
+ssh -n node1 'cd /users/cseas002/mcperf; sudo python3 configure.py -v --kernelconfig=baseline -v'
 ```
 
 ## Setting and checking uncore freq

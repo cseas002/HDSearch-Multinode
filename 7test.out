@@ -1,0 +1,767 @@
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Install HDSearch] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+PLAY [Set Up Docker Curl] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+PLAY [Make space to commit] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [Make Space to Commit Image] **********************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node1] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.998638", "end": "2023-10-10 17:48:07.766537", "rc": 0, "start": "2023-10-10 17:48:06.767899", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node2] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:01.012351", "end": "2023-10-10 17:48:07.781834", "rc": 0, "start": "2023-10-10 17:48:06.769483", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node0] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:07.105817", "end": "2023-10-10 17:48:13.872125", "rc": 0, "start": "2023-10-10 17:48:06.766308", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+
+PLAY [Install Profiler Dep] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Set profiler Hosts] ******************************************************
+changed: [node2] => {"ansible_job_id": "29476046803.7799", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/29476046803.7799", "started": 1}
+changed: [node1] => {"ansible_job_id": "500559208262.8029", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/500559208262.8029", "started": 1}
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+ok: [node0]
+
+TASK [Leave Swarm] *************************************************************
+changed: [node0] => {"ansible_job_id": "392408210761.3441", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/392408210761.3441", "started": 1}
+changed: [node2] => {"ansible_job_id": "69304749813.7925", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/69304749813.7925", "started": 1}
+changed: [node1] => {"ansible_job_id": "642599749514.8155", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/642599749514.8155", "started": 1}
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Init Master] *************************************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node0] => {"changed": true, "cmd": "sudo docker swarm init --advertise-addr 10.10.1.1", "delta": "0:00:03.374221", "end": "2023-10-10 17:48:26.021337", "rc": 0, "start": "2023-10-10 17:48:22.647116", "stderr": "", "stderr_lines": [], "stdout": "Swarm initialized: current node (wwqgexvgvvsao1bjubebo23os) is now a manager.\n\nTo add a worker to this swarm, run the following command:\n\n    docker swarm join --token SWMTKN-1-4mj7s20bwjdip5c0eiciagzb9pv0v28fg8cet1x65h6ma5m9fl-9x5ijnfixqpikbkwo4gogxnwt 10.10.1.1:2377\n\nTo add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.", "stdout_lines": ["Swarm initialized: current node (wwqgexvgvvsao1bjubebo23os) is now a manager.", "", "To add a worker to this swarm, run the following command:", "", "    docker swarm join --token SWMTKN-1-4mj7s20bwjdip5c0eiciagzb9pv0v28fg8cet1x65h6ma5m9fl-9x5ijnfixqpikbkwo4gogxnwt 10.10.1.1:2377", "", "To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions."]}
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Init Workers] ************************************************************
+changed: [node1] => {"ansible_job_id": "759884313164.8288", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/759884313164.8288", "started": 1}
+changed: [node2] => {"ansible_job_id": "712313009209.8058", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/712313009209.8058", "started": 1}
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Set uncore frequency] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+TASK [Load msr kernel module] **************************************************
+changed: [node2] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.007300", "end": "2023-10-10 17:48:31.937492", "rc": 0, "start": "2023-10-10 17:48:31.930192", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.007959", "end": "2023-10-10 17:48:31.944049", "rc": 0, "start": "2023-10-10 17:48:31.936090", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [Set uncore freq] *********************************************************
+changed: [node2] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.007377", "end": "2023-10-10 17:48:32.198165", "rc": 0, "start": "2023-10-10 17:48:32.190788", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.007144", "end": "2023-10-10 17:48:32.229279", "rc": 0, "start": "2023-10-10 17:48:32.222135", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Nothing found in stack: microsuite
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+
+INFO:root:ssh -A node0 hostname
+INFO:root:node0.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node1 hostname
+INFO:root:node1.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node2 hostname
+INFO:root:node2.hdsearch2.ramp-pg0.wisc.cloudlab.us
+Ignoring deprecated options:
+
+expose: Exposing ports is unnecessary - services on the same network can access each other's containers on any port.
+
+Creating network microsuite_default
+Creating service microsuite_client
+Creating service microsuite_bucket
+Creating service microsuite_midtier
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Run remote profiler] *****************************************************
+changed: [node0] => {"changed": true, "cmd": "/users/cseas002/HDSearch-Multinode/scripts/startProfiler.sh /users/cseas002/HDSearch-Multinode/hosts 0", "delta": "0:15:35.557276", "end": "2023-10-10 18:04:29.759227", "rc": 0, "start": "2023-10-10 17:48:54.201951", "stderr": "[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use \n/usr/bin/python3, but is using /usr/bin/python for backward compatibility with \nprior Ansible releases. A future Ansible release will default to using the \ndiscovered platform python for this host. See https://docs.ansible.com/ansible/\n2.9/reference_appendices/interpreter_discovery.html for more information. This \nfeature will be removed in version 2.12. Deprecation warnings can be disabled \nby setting deprecation_warnings=False in ansible.cfg.\n[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use \n/usr/bin/python3, but is using /usr/bin/python for backward compatibility with \nprior Ansible releases. A future Ansible release will default to using the \ndiscovered platform python for this host. See https://docs.ansible.com/ansible/\n2.9/reference_appendices/interpreter_discovery.html for more information. This \nfeature will be removed in version 2.12. Deprecation warnings can be disabled \nby setting deprecation_warnings=False in ansible.cfg.\nPseudo-terminal will not be allocated because stdin is not a terminal.\r\nssh: Could not resolve hostname cd /users/cseas002/hdsearch-multinode/profiler/; sudo /users/cseas002/hdsearch-multinode/profiler/profiler.sh run_profiler 0 : Name or service not known", "stderr_lines": ["[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node2 should use ", "/usr/bin/python3, but is using /usr/bin/python for backward compatibility with ", "prior Ansible releases. A future Ansible release will default to using the ", "discovered platform python for this host. See https://docs.ansible.com/ansible/", "2.9/reference_appendices/interpreter_discovery.html for more information. This ", "feature will be removed in version 2.12. Deprecation warnings can be disabled ", "by setting deprecation_warnings=False in ansible.cfg.", "[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host node1 should use ", "/usr/bin/python3, but is using /usr/bin/python for backward compatibility with ", "prior Ansible releases. A future Ansible release will default to using the ", "discovered platform python for this host. See https://docs.ansible.com/ansible/", "2.9/reference_appendices/interpreter_discovery.html for more information. This ", "feature will be removed in version 2.12. Deprecation warnings can be disabled ", "by setting deprecation_warnings=False in ansible.cfg.", "Pseudo-terminal will not be allocated because stdin is not a terminal.", "ssh: Could not resolve hostname cd /users/cseas002/hdsearch-multinode/profiler/; sudo /users/cseas002/hdsearch-multinode/profiler/profiler.sh run_profiler 0 : Name or service not known"], "stdout": "/users/cseas002/HDSearch-Multinode/hosts\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nsleep\nnode1\n8976\nUsing /etc/ansible/ansible.cfg as config file\n\nPLAY [Run remote profiler] *****************************************************\n\nTASK [Gathering Facts] *********************************************************\nok: [node2]\n\nTASK [Run remote profiler] *****************************************************\nchanged: [node2] => {\"ansible_job_id\": \"226175667300.9733\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/226175667300.9733\", \"started\": 1}\n\nTASK [Check remote profiler] ***************************************************\nok: [node2] => {\"ansible_job_id\": \"226175667300.9733\", \"changed\": false, \"finished\": 0, \"started\": 1}\n\nPLAY [Kill remote profiler] ****************************************************\n\nPLAY RECAP *********************************************************************\nnode2                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   \n\nnode2\nnode1\nUsing /etc/ansible/ansible.cfg as config file\n\nPLAY [Run remote profiler] *****************************************************\n\nTASK [Gathering Facts] *********************************************************\nok: [node1]\n\nTASK [Run remote profiler] *****************************************************\nchanged: [node1] => {\"ansible_job_id\": \"106841480018.10397\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/106841480018.10397\", \"started\": 1}\n\nTASK [Check remote profiler] ***************************************************\nok: [node1] => {\"ansible_job_id\": \"106841480018.10397\", \"changed\": false, \"finished\": 0, \"started\": 1}\n\nPLAY [Kill remote profiler] ****************************************************\n\nPLAY RECAP *********************************************************************\nnode1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   \n\n\nnode2", "stdout_lines": ["/users/cseas002/HDSearch-Multinode/hosts", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "sleep", "node1", "8976", "Using /etc/ansible/ansible.cfg as config file", "", "PLAY [Run remote profiler] *****************************************************", "", "TASK [Gathering Facts] *********************************************************", "ok: [node2]", "", "TASK [Run remote profiler] *****************************************************", "changed: [node2] => {\"ansible_job_id\": \"226175667300.9733\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/226175667300.9733\", \"started\": 1}", "", "TASK [Check remote profiler] ***************************************************", "ok: [node2] => {\"ansible_job_id\": \"226175667300.9733\", \"changed\": false, \"finished\": 0, \"started\": 1}", "", "PLAY [Kill remote profiler] ****************************************************", "", "PLAY RECAP *********************************************************************", "node2                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   ", "", "node2", "node1", "Using /etc/ansible/ansible.cfg as config file", "", "PLAY [Run remote profiler] *****************************************************", "", "TASK [Gathering Facts] *********************************************************", "ok: [node1]", "", "TASK [Run remote profiler] *****************************************************", "changed: [node1] => {\"ansible_job_id\": \"106841480018.10397\", \"changed\": true, \"finished\": 0, \"results_file\": \"/root/.ansible_async/106841480018.10397\", \"started\": 1}", "", "TASK [Check remote profiler] ***************************************************", "ok: [node1] => {\"ansible_job_id\": \"106841480018.10397\", \"changed\": false, \"finished\": 0, \"started\": 1}", "", "PLAY [Kill remote profiler] ****************************************************", "", "PLAY RECAP *********************************************************************", "node1                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   ", "", "", "node2"]}
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Run remote socwatch] *****************************************************
+changed: [node2] => {"ansible_job_id": "690697038060.9991", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/690697038060.9991", "started": 1}
+changed: [node1] => {"ansible_job_id": "49445017592.10650", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/49445017592.10650", "started": 1}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Check Status] ************************************************************
+changed: [node0] => {"changed": true, "cmd": "/users/cseas002/HDSearch-Multinode/scripts/check-run-status.sh", "delta": "0:01:42.498861", "end": "2023-10-10 18:06:18.488900", "rc": 0, "start": "2023-10-10 18:04:35.990039", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+INFO:root:./scripts/check-socwatch-status.sh node1
+INFO:root:2
+INFO:root:./scripts/check-socwatch-status.sh node2
+INFO:root:2
+INFO:root:sudo docker service logs microsuite_client --raw
+INFO:root:client start
+INFO:root:mv: cannot stat 'image_feature_vectors.dat': No such file or directory
+INFO:root:rm -f *.o *.pb.cc *.pb.h load_generator_open_loop load_generator_closed_loop kill_index_server_empty
+INFO:root:g++ -std=c++11 -O3 -mavx2 -mavx -fopenmp  -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -I../ -I/usr/local/include -pthread -O3 -I../ -g -Wall -fopenmp -I../  -c -o helper_files/mid_tier_client_helper.o helper_files/mid_tier_client_helper.cc
+INFO:root:[01m[Khelper_files/mid_tier_client_helper.cc:[m[K In function '[01m[Kvoid CreateDatasetFromBinaryFile(const string&, MultiplePoints*)[m[K':
+INFO:root:[01m[Khelper_files/mid_tier_client_helper.cc:296:77:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [[01;35m[K-Wsign-compare[m[K]
+INFO:root:         if([01;35m[Kfread(values, sizeof(float), dataset_dimensions, dataset_binary) == dataset_dimensions[m[K)
+INFO:root:            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+INFO:root:[01m[Khelper_files/mid_tier_client_helper.cc:[m[K In function '[01m[Kvoid ResetMetaStats(GlobalStats*, int)[m[K':
+INFO:root:[01m[Khelper_files/mid_tier_client_helper.cc:586:31:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [[01;35m[K-Wsign-compare[m[K]
+INFO:root:     for(unsigned int i = 0; [01;35m[Ki < number_of_bucket_servers[m[K; i++)
+INFO:root:                             [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+INFO:root:g++ -std=c++11 -O3 -mavx2 -mavx -fopenmp  -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -I../ -I/usr/local/include -pthread -O3 -I../ -g -Wall -fopenmp -I../  -c -o load_generator_open_loop.o load_generator_open_loop.cc
+INFO:root:[01m[Kload_generator_open_loop.cc:[m[K In function '[01m[Kint main(int, char**)[m[K':
+INFO:root:[01m[Kload_generator_open_loop.cc:305:51:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [[01;35m[K-Wsign-compare[m[K]
+INFO:root:     while ([01;35m[Kresponses_recvd->AtomicallyReadCount() < overall_queries[m[K)
+INFO:root:            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+INFO:root:[01m[Kload_generator_open_loop.cc:307:75:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [[01;35m[K-Wsign-compare[m[K]
+INFO:root:         if (curr_time >= next_time && [01;35m[Knum_requests->AtomicallyReadCount() < overall_queries[m[K)
+INFO:root:                                       [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+INFO:root:g++ ../protoc_files/mid_tier.pb.o ../protoc_files/mid_tier.grpc.pb.o ../bucket_service/src/multiple_points.o ../bucket_service/src/point.o ../bucket_service/src/utils.o ../bucket_service/src/dist_calc.o ../bucket_service/src/custom_priority_queue.o helper_files/mid_tier_client_helper.o helper_files/timing.o helper_files/utils.o load_generator_open_loop.o -O3 -o load_generator_open_loop -L/usr/local/lib `pkg-config --libs grpc++ grpc` -lprotobuf -lpthread -I /usr/local/include -lflann -fopenmp -L/usr/lib64 -lstdc++ -lssl -lcrypto -fopenmp -Wl,--start-group /opt/intel/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/mkl/lib/intel64/libmkl_gnu_thread.a /opt/intel/mkl/lib/intel64/libmkl_core.a -Wl,--end-group -lgomp -lpthread -lm -ldl -I../
+INFO:root:g++ -std=c++11 -O3 -mavx2 -mavx -fopenmp  -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -I../ -I/usr/local/include -pthread -O3 -I../ -g -Wall -fopenmp -I../  -c -o load_generator_closed_loop.o load_generator_closed_loop.cc
+INFO:root:g++ ../protoc_files/mid_tier.pb.o ../protoc_files/mid_tier.grpc.pb.o ../bucket_service/src/multiple_points.o ../bucket_service/src/point.o ../bucket_service/src/utils.o ../bucket_service/src/dist_calc.o ../bucket_service/src/custom_priority_queue.o helper_files/mid_tier_client_helper.o helper_files/timing.o helper_files/utils.o load_generator_closed_loop.o -O3 -o load_generator_closed_loop -L/usr/local/lib `pkg-config --libs grpc++ grpc` -lprotobuf -lpthread -I /usr/local/include -lflann -fopenmp -L/usr/lib64 -lstdc++ -lssl -lcrypto -fopenmp -Wl,--start-group /opt/intel/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/mkl/lib/intel64/libmkl_gnu_thread.a /opt/intel/mkl/lib/intel64/libmkl_core.a -Wl,--end-group -lgomp -lpthread -lm -ldl -I../
+INFO:root:g++ -std=c++11 -O3 -mavx2 -mavx -fopenmp  -DMKL_ILP64 -m64 -I/opt/intel/mkl/include -I../ -I/usr/local/include -pthread -O3 -I../ -g -Wall -fopenmp -I../  -c -o kill_index_server_empty.o kill_index_server_empty.cc
+INFO:root:g++ ../protoc_files/mid_tier.pb.o ../protoc_files/mid_tier.grpc.pb.o ../bucket_service/src/multiple_points.o ../bucket_service/src/point.o ../bucket_service/src/utils.o ../bucket_service/src/dist_calc.o ../bucket_service/src/custom_priority_queue.o helper_files/mid_tier_client_helper.o helper_files/timing.o helper_files/utils.o kill_index_server_empty.o -O3 -o kill_index_server_empty -L/usr/local/lib `pkg-config --libs grpc++ grpc` -lprotobuf -lpthread -I /usr/local/include -lflann -fopenmp -L/usr/lib64 -lstdc++ -lssl -lcrypto -fopenmp -Wl,--start-group /opt/intel/mkl/lib/intel64/libmkl_intel_ilp64.a /opt/intel/mkl/lib/intel64/libmkl_gnu_thread.a /opt/intel/mkl/lib/intel64/libmkl_core.a -Wl,--end-group -lgomp -lpthread -lm -ldl -I../
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier: forward host lookup failed: Unknown host
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:midtier [10.0.1.8] 50054 (?) : Connection refused
+INFO:root:         @    @       �           ?                midtier launched
+INFO:root:profilers launched
+INFO:root:mkdir: cannot create directory './results': File exists
+INFO:root:1 1 1 # Requests: 0 
+INFO:root:# Responses: 0 
+INFO:root:!!!!!!!End of Warmup Period!!!!!!! 
+INFO:root:Next time = 1696979058862736.000000
+INFO:root:1 1 1 End of Actual Run
+INFO:root:# Requests: 119 
+INFO:root:# Responses: 119 
+INFO:root:Achieved QPS: 0.991667 
+INFO:root:Average Response Time(ms): 2.78506 
+INFO:root:1.59 1.643 1.715 1.822 1.874 1.921 2.016 5.121 6.11 6.412 10.31 12.534 1.59 1.643 1.715 1.822 1.874 1.921 2.016 5.121 6.11 6.412 10.31 12.534 
+INFO:root: Total response time 
+INFO:root:1.59 1.643 1.715 1.822 1.874 1.921 2.016 5.121 6.11 6.412 10.31 12.534 
+INFO:root:
+INFO:root: Index creation time 0 0 0 0 0 0 0 0 0 0 0 0 
+INFO:root: Update index util time 0 0 0 0 0 0 0 0.504 0.526 0.549 0.56 0.563 
+INFO:root: Unpack loadgen request time 0.052 0.052 0.053 0.053 0.053 0.054 0.054 0.056 0.058 0.06 0.063 0.065 
+INFO:root: Get point ids time 
+INFO:root:0.119 0.146 0.157 0.18 0.199 0.23 0.311 0.356 0.426 0.444 0.493 0.628 
+INFO:root: Total time taken by index server: 
+INFO:root:0.599 0.629 0.645 0.663 0.738 0.834 0.893 1.097 1.233 1.374 1.55 2.021 Average Index Time(ms): 0.834597 
+INFO:root:
+INFO:root: Get bucket responses time 
+INFO:root:0.791 0.817 0.84 0.867 0.903 0.927 0.999 3.73 4.712 4.798 9.05 11.07 Average Bucket Time(ms): 1.73253 
+INFO:root:
+INFO:root: Create bucket request time 0 0 0 0 0 0 0 0 0 0 0 0 
+INFO:root: Unpack bucket request time 0.021 0.023 0.023 0.024 0.024 0.025 0.026 0.027 0.031 0.053 0.061 0.083 
+INFO:root: Calculate knn time 
+INFO:root:0.09 0.107 0.131 0.146 0.162 0.168 0.172 0.174 0.181 0.214 0.221 0.231 
+INFO:root: Pack bucket response time 0.001 0.001 0.001 0.001 0.001 0.002 0.002 0.002 0.002 0.002 0.003 0.041 
+INFO:root: Unpack bucket response time 0 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 
+INFO:root: Merge time 0.03 0.031 0.031 0.032 0.033 0.039 0.046 0.047 0.049 0.057 0.066 0.067 
+INFO:root: Pack index response time 0.03 0.031 0.031 0.032 0.033 0.039 0.046 0.047 0.049 0.057 0.066 0.067 
+INFO:root: Unpack index response time 0.002 0.002 0.002 0.002 0.002 0.002 0.002 0.002 0.003 0.003 0.003 0.003 
+INFO:root: 0
+INFO:root:sudo touch /users/cseas002/data/TEST7/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1-0/hdsearch_client
+INFO:root:touch: cannot touch '/users/cseas002/data/TEST7/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1-0/hdsearch_client': No such file or directory
+INFO:root:sudo chmod 777 /users/cseas002/data/TEST7/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1-0/hdsearch_client
+INFO:root:chmod: cannot access '/users/cseas002/data/TEST7/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1-0/hdsearch_client': No such file or directory
+ansible-playbook -v -i hosts -e "" --tags "setup_docker" ansible/install.yml
+ansible-playbook -v -i hosts -e "" --tags "set_profiler_hosts" ansible/profiler.yml
+ansible-playbook -v -i hosts -e "" --tags "leave_swarm" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "" --tags "init_master" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "" --tags "init_workers" ansible/hdsearch.yml
+ansible-playbook -v -i hosts -e "MSR_VALUE=0x1414"  ansible/configure.yml
+ansible-playbook -v -i hosts -e "" --tags "kill_profiler" ansible/profiler.yml
+ansible-playbook -v -i hosts -e "HOST_FILE=/users/cseas002/HDSearch-Multinode/hosts ITERATION=0" --tags "run_profiler" ansible/profiler.yml
+Profilerrrrr putput 0
+ansible-playbook -v -i hosts -e "MONITOR_TIME=40 OUTPUT_FILE=turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1" --tags "run_socwatch" ./ansible/profiler.yml
+ansible-playbook -v -i hosts -e "" --tags "check_status" ansible/hdsearch.yml
+Traceback (most recent call last):
+  File "run_experiment.py", line 444, in <module>
+    main(sys.argv[1:])
+  File "run_experiment.py", line 440, in main
+    run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+  File "run_experiment.py", line 365, in run_multiple_experiments
+    status = run_single_experiment(system_conf,root_results_dir, name_prefix, instance_conf, iter,bucket,midtier)
+  File "run_experiment.py", line 323, in run_single_experiment
+    with open(client_results_path_name, 'w') as fo:
+FileNotFoundError: [Errno 2] No such file or directory: '/users/cseas002/data/TEST7/turbo=False-kernelconfig=baseline-baseline-hyperthreading=False-qps=1-0/hdsearch_client'

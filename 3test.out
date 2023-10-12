@@ -1,0 +1,318 @@
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Install HDSearch] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+PLAY [Set Up Docker Curl] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node0]
+ok: [node1]
+
+PLAY [Make space to commit] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+ok: [node0]
+
+TASK [Make Space to Commit Image] **********************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node1] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:00.985358", "end": "2023-10-10 08:17:30.772722", "rc": 0, "start": "2023-10-10 08:17:29.787364", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node2] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:01.005920", "end": "2023-10-10 08:17:30.794074", "rc": 0, "start": "2023-10-10 08:17:29.788154", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node0] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:03.183469", "end": "2023-10-10 08:17:32.960294", "rc": 0, "start": "2023-10-10 08:17:29.776825", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+
+PLAY [Install Profiler Dep] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+TASK [Set profiler Hosts] ******************************************************
+changed: [node1] => {"ansible_job_id": "308798641607.10484", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/308798641607.10484", "started": 1}
+changed: [node2] => {"ansible_job_id": "650494679397.9640", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/650494679397.9640", "started": 1}
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node0]
+ok: [node2]
+
+TASK [Leave Swarm] *************************************************************
+changed: [node0] => {"ansible_job_id": "488780466255.38961", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/488780466255.38961", "started": 1}
+changed: [node2] => {"ansible_job_id": "335308507796.9767", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/335308507796.9767", "started": 1}
+changed: [node1] => {"ansible_job_id": "373176482779.10611", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/373176482779.10611", "started": 1}
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Init Master] *************************************************************
+[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather
+than running sudo
+changed: [node0] => {"changed": true, "cmd": "sudo docker swarm init --advertise-addr 10.10.1.1", "delta": "0:00:00.606488", "end": "2023-10-10 08:17:44.119555", "rc": 0, "start": "2023-10-10 08:17:43.513067", "stderr": "", "stderr_lines": [], "stdout": "Swarm initialized: current node (d1x4peopmkhbrt7p2hp882kl5) is now a manager.\n\nTo add a worker to this swarm, run the following command:\n\n    docker swarm join --token SWMTKN-1-5bsth6iyqk0ua7g4jzv3x8gbey5rym4gkhgku0ha76q9nkfukb-3b8jk9is1zofzakn3yczc3md5 10.10.1.1:2377\n\nTo add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.", "stdout_lines": ["Swarm initialized: current node (d1x4peopmkhbrt7p2hp882kl5) is now a manager.", "", "To add a worker to this swarm, run the following command:", "", "    docker swarm join --token SWMTKN-1-5bsth6iyqk0ua7g4jzv3x8gbey5rym4gkhgku0ha76q9nkfukb-3b8jk9is1zofzakn3yczc3md5 10.10.1.1:2377", "", "To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions."]}
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+TASK [Init Workers] ************************************************************
+changed: [node1] => {"ansible_job_id": "849869300012.10741", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/849869300012.10741", "started": 1}
+changed: [node2] => {"ansible_job_id": "333062637462.9900", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/333062637462.9900", "started": 1}
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Set uncore frequency] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Load msr kernel module] **************************************************
+changed: [node2] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.007892", "end": "2023-10-10 08:17:51.944541", "rc": 0, "start": "2023-10-10 08:17:51.936649", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.007832", "end": "2023-10-10 08:17:51.955557", "rc": 0, "start": "2023-10-10 08:17:51.947725", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [Set uncore freq] *********************************************************
+changed: [node2] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.007013", "end": "2023-10-10 08:17:52.239187", "rc": 0, "start": "2023-10-10 08:17:52.232174", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.007127", "end": "2023-10-10 08:17:52.249117", "rc": 0, "start": "2023-10-10 08:17:52.241990", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Nothing found in stack: microsuite
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+
+INFO:root:ssh -A node0 hostname
+INFO:root:node0.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node1 hostname
+INFO:root:node1.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node2 hostname
+INFO:root:node2.hdsearch2.ramp-pg0.wisc.cloudlab.us
+Ignoring deprecated options:
+
+expose: Exposing ports is unnecessary - services on the same network can access each other's containers on any port.
+
+Creating network microsuite_default
+Creating service microsuite_bucket
+Creating service microsuite_midtier
+Creating service microsuite_client
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+TASK [Run remote socwatch] *****************************************************
+changed: [node2] => {"ansible_job_id": "417862356213.10447", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/417862356213.10447", "started": 1}
+changed: [node1] => {"ansible_job_id": "768076177481.11283", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/768076177481.11283", "started": 1}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Check Status] ************************************************************
+fatal: [node0]: UNREACHABLE! => {"changed": false, "msg": "Data could not be sent to remote host \"node0\". Make sure this host can be reached over ssh: ", "unreachable": true}
+
+PLAY RECAP *********************************************************************
+node0                      : ok=1    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+Removing service microsuite_bucket
+Removing service microsuite_client
+Removing service microsuite_midtier
+Removing network microsuite_default
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+
+INFO:root:ssh -A node0 hostname
+INFO:root:node0.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node1 hostname
+INFO:root:node1.hdsearch2.ramp-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node2 hostname
+INFO:root:node2.hdsearch2.ramp-pg0.wisc.cloudlab.us
+Ignoring deprecated options:
+
+expose: Exposing ports is unnecessary - services on the same network can access each other's containers on any port.
+
+Creating network microsuite_default
+Creating service microsuite_bucket
+Creating service microsuite_midtier
+Creating service microsuite_client
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Run remote socwatch] *****************************************************
+changed: [node2] => {"ansible_job_id": "70611347267.18973", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/70611347267.18973", "started": 1}
+changed: [node1] => {"ansible_job_id": "488889289074.20805", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/488889289074.20805", "started": 1}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Check Status] ************************************************************
+changed: [node0] => {"changed": true, "cmd": "/users/cseas002/HDSearch-Multinode/scripts/check-run-status.sh", "delta": "1:39:56.792804", "end": "2023-10-10 14:25:39.292406", "rc": 0, "start": "2023-10-10 12:45:42.499602", "stderr": "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.\nError response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.\nError response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.\nError response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nError response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client\nno such task or service: microsuite_client", "stderr_lines": ["Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.", "Error response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.", "Error response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.", "Error response from daemon: This node is not a swarm manager. Manager is being prepared or has trouble connecting to the cluster.", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "Error response from daemon: This node is not a swarm manager. Use \"docker swarm init\" or \"docker swarm join\" to connect this node to swarm and try again.", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client", "no such task or service: microsuite_client"], "stdout": "", "stdout_lines": []}
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

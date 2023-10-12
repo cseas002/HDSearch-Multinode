@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export ANSIBLE_HOST_KEY_CHECKING=False
-export PROFILER_HOME=~/HDSearch-Multinode/profiler
+export PROFILER_HOME=/users/cseas002/HDSearch-Multinode/profiler
 
 install_dep () {
   sudo apt-add-repository ppa:ansible/ansible -y

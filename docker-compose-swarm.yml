@@ -1,169 +1,170 @@
 version: "3"
 services:
-  bucket:
-    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    volumes:
-        - /users/cseas002//HDSearch-Multinode/microsuite_files/:/home/data
-        - /mydata/HDSearch/:/home/
-    expose:
-        - "50050"
-        - "50051"
-        - "50052"
-        - "50053"
-    cap_add:
-        - SYS_PTRACE
-    deploy:
-        restart_policy:
+    bucket:
+        image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+        stdin_open: true # docker run -i
+        tty: true # docker run -t
+        volumes:
+            - /users/cseas002//HDSearch-Multinode/microsuite_files/:/home/data
+            - /mydata/HDSearch/:/home/
+        expose:
+            - "50050"
+            - "50051"
+            - "50052"
+            - "50053"
+        cap_add:
+            - SYS_PTRACE
+        deploy:
+            restart_policy:
                 condition: none
-        placement:
-                constraints: ["node.hostname == ${NODE2}"]
-    command: >
-        bash -c "#wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-                mv image_feature_vectors.dat /home
-                cd /MicroSuite/src/HDSearch/bucket_service/service
-                taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50050 2 1 0 4 &
-                taskset -c 5 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 1 1 4 &
-                taskset -c 10 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 1 2 4 &
-                taskset -c 15 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 1 3 4"
-#  bucket2:
-#    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-#    stdin_open: true # docker run -i
-#    tty: true        # docker run -t
-#    volumes:
-#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
-#    expose:
-#        - "50051"
-#    cap_add:
-#        - SYS_PTRACE
-#    deploy:
-#        restart_policy:
-#                condition: none
-#        placement:
-#                constraints: ["node.hostname == ${NODE2}"]
-#    command: >
-#        bash -c "while ! echo exit | nc bucket 50050; do sleep 1; done
-#                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-#                mv image_feature_vectors.dat /home
-#                cd /MicroSuite/src/HDSearch/bucket_service/service
-#                taskset -c 5,6,7,8,9 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 5 1 4"
-#  bucket3:
-#    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-#    stdin_open: true # docker run -i
-#    tty: true        # docker run -t
-#    volumes:
-#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
-#    expose:
-#        - "50052"
-#    cap_add:
-#        - SYS_PTRACE
-#    deploy:
-#        restart_policy:
-#                condition: none
-#        placement:
-#                constraints: ["node.hostname == ${NODE2}"]
-#    command: >
-#        bash -c "while ! echo exit | nc bucket2 50051; do sleep 1; done
-#                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-#                mv image_feature_vectors.dat /home
-#                cd /MicroSuite/src/HDSearch/bucket_service/service
-#                taskset -c 10,11,12,13,14 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 5 2 4"
-#  bucket4:
-#    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-#    stdin_open: true # docker run -i
-#    tty: true        # docker run -t
-#    volumes:
-#        - ~/HDSearch-Multinode/microsuite/MicroSuite:/home/data
-#    expose:
-#        - "50053"
-#    cap_add:
-#        - SYS_PTRACE
-#    deploy:
-#        restart_policy:
-#                condition: none
-#        placement:
-#                constraints: ["node.hostname == ${NODE2}"]
-#    command: >
-#        bash -c "while ! echo exit | nc bucket3 50052; do sleep 1; done
-#                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-#                mv image_feature_vectors.dat /home
-#                cd /MicroSuite/src/HDSearch/bucket_service/service
-#                taskset -c 15,16,17,18,19 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 5 3 4"
-  midtier:
-    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    volumes:
-        - ~/HDSearch-Multinode/microsuite_files/:/home/data
-        - /mydata/HDSearch/:/home/
-    expose:
-        - "50054"
-    cap_add:
-        - SYS_PTRACE      
-    deploy:
-        restart_policy:
-                condition: none
-        placement:
-                constraints: ["node.hostname == ${NODE1}"]
-    command: >
-        bash -c "#wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-                mv image_feature_vectors.dat /home
-                # wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/mid_tier_server.cc
-                cp /home/mid_tier_server.cc /MicroSuite/src/HDSearch/mid_tier_service/service
-                while ! echo exit | nc bucket 50050; do sleep 1; done
-                while ! echo exit | nc bucket 50051; do sleep 1; done
-                while ! echo exit | nc bucket 50052; do sleep 1; done
-                while ! echo exit | nc bucket 50053; do sleep 1; done
-                echo 'bucket launched'
-                cd /MicroSuite/src/HDSearch/mid_tier_service/service
-                make clean
-                make
-                touch bucket_servers_IP.txt
-                echo "bucket:50050" > bucket_servers_IP.txt
-                echo "bucket:50051" >> bucket_servers_IP.txt
-                echo "bucket:50052" >> bucket_servers_IP.txt
-                echo "bucket:50053" >> bucket_servers_IP.txt
-                taskset -c 1 ./mid_tier_server 1 13 1 4 bucket_servers_IP.txt /home/image_feature_vectors.dat 2 0.0.0.0:50054 1 1 1 0"
-  client:
-    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
-    #networks:
-    #  - outside
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    volumes:
-        - ~/HDSearch-Multinode/microsuite_files/:/home/data
-        - /mydata/HDSearch/:/home/
-    cap_add:
-        - SYS_PTRACE      
-    deploy:
-        restart_policy:
-                condition: none
-        placement:
-                constraints: ["node.hostname == ${NODE0}"]
-    command: >
-        bash -c "
-                echo 'client start'
-                #wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
-                mv image_feature_vectors.dat /home
-                #wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/load_generator_open_loop_time.cc
-                cp /home/load_generator_open_loop_time.cc /MicroSuite/src/HDSearch/load_generator/load_generator_open_loop.cc
-                #wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/mid_tier_client_helper.cc
-                cp /home/mid_tier_client_helper.cc /MicroSuite/src/HDSearch/load_generator/helper_files/
-                cd /MicroSuite/src/HDSearch/load_generator
-                make clean
-                make
-                while ! echo exit | nc midtier 50054; do sleep 1; done
-                echo 'midtier launched'
-                
-                #while ! echo "" | nc node2 8000 ; do sleep 1; done
-                #while ! echo "" | nc node1 8000 ; do sleep 1; done
+            placement:
+                constraints: [ "node.hostname == ${NODE2}" ]
+        command: >
+            bash -c "#wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+                    mv image_feature_vectors.dat /home
+                    cd /MicroSuite/src/HDSearch/bucket_service/service
 
-                echo 'profilers launched'
-                cd /MicroSuite/src/HDSearch/load_generator
-                mkdir ./results
-                ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 0.01 midtier:50054 dummy1 dummy2 dummy3"
-#networks:
-#  outside:
-#    external:
-#      name: "host"
+                    taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50050 2 1 0 4 &
+                    taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 1 1 4 &
+                    taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 1 2 4 &
+                    taskset -c 1 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 1 3 4
+                    
+                    parent_pid=$(pgrep -o bucket_server)
+
+                    # Get the CPU affinity mask of the parent process
+                    parent_affinity=$(taskset -c -p $parent_pid | awk '{print $NF}')
+
+                    # Find all threads under the parent process
+                    thread_pids=$(ps -T -p $parent_pid | awk '{print $1}' | tail -n +2)
+
+                    # Set the CPU affinity of each thread to match the parent process
+                    for thread_pid in $thread_pids; do
+                    taskset -c -p $parent_affinity $thread_pid
+                    done"
+    #  bucket2:
+    #    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+    #    stdin_open: true # docker run -i
+    #    tty: true        # docker run -t
+    #    volumes:
+    #        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+    #    expose:
+    #        - "50051"
+    #    cap_add:
+    #        - SYS_PTRACE
+    #    deploy:
+    #        restart_policy:
+    #                condition: none
+    #        placement:
+    #                constraints: ["node.hostname == ${NODE2}"]
+    #    command: >
+    #        bash -c "while ! echo exit | nc bucket 50050; do sleep 1; done
+    #                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+    #                mv image_feature_vectors.dat /home
+    #                cd /MicroSuite/src/HDSearch/bucket_service/service
+    #                taskset -c 5,6,7,8,9 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50051 2 5 1 4"
+    #  bucket3:
+    #    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+    #    stdin_open: true # docker run -i
+    #    tty: true        # docker run -t
+    #    volumes:
+    #        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+    #    expose:
+    #        - "50052"
+    #    cap_add:
+    #        - SYS_PTRACE
+    #    deploy:
+    #        restart_policy:
+    #                condition: none
+    #        placement:
+    #                constraints: ["node.hostname == ${NODE2}"]
+    #    command: >
+    #        bash -c "while ! echo exit | nc bucket2 50051; do sleep 1; done
+    #                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+    #                mv image_feature_vectors.dat /home
+    #                cd /MicroSuite/src/HDSearch/bucket_service/service
+    #                taskset -c 10,11,12,13,14 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50052 2 5 2 4"
+    #  bucket4:
+    #    image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+    #    stdin_open: true # docker run -i
+    #    tty: true        # docker run -t
+    #    volumes:
+    #        - /users/cseas002/HDSearch-Multinode/microsuite/MicroSuite:/home/data
+    #    expose:
+    #        - "50053"
+    #    cap_add:
+    #        - SYS_PTRACE
+    #    deploy:
+    #        restart_policy:
+    #                condition: none
+    #        placement:
+    #                constraints: ["node.hostname == ${NODE2}"]
+    #    command: >
+    #        bash -c "while ! echo exit | nc bucket3 50052; do sleep 1; done
+    #                wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+    #                mv image_feature_vectors.dat /home
+    #                cd /MicroSuite/src/HDSearch/bucket_service/service
+    #                taskset -c 15,16,17,18,19 ./bucket_server /home/image_feature_vectors.dat 0.0.0.0:50053 2 5 3 4"
+    midtier:
+        image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+        stdin_open: true # docker run -i
+        tty: true # docker run -t
+        volumes:
+            - /users/cseas002/HDSearch-Multinode/microsuite_files/:/home/data
+            - /mydata/HDSearch/:/home/
+        expose:
+            - "50054"
+        cap_add:
+            - SYS_PTRACE
+        deploy:
+            restart_policy:
+                condition: none
+            placement:
+                constraints: [ "node.hostname == ${NODE1}" ]
+        command: >
+            bash -c "#wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+                    mv image_feature_vectors.dat /home
+                    # wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/mid_tier_server.cc
+                    cp /home/mid_tier_server.cc /MicroSuite/src/HDSearch/mid_tier_service/service
+                    while ! echo exit | nc bucket 50050; do sleep 1; done
+                    while ! echo exit | nc bucket 50051; do sleep 1; done
+                    while ! echo exit | nc bucket 50052; do sleep 1; done
+                    while ! echo exit | nc bucket 50053; do sleep 1; done
+                    echo 'bucket launched'
+                    cd /MicroSuite/src/HDSearch/mid_tier_service/service
+                    make clean
+                    make
+                    touch bucket_servers_IP.txt
+                    echo "bucket:50050" > bucket_servers_IP.txt
+                    echo "bucket:50051" >> bucket_servers_IP.txt
+                    echo "bucket:50052" >> bucket_servers_IP.txt
+                    echo "bucket:50053" >> bucket_servers_IP.txt
+                    taskset -c 1 ./mid_tier_server 1 13 1 4 bucket_servers_IP.txt /home/image_feature_vectors.dat 2 0.0.0.0:50054 1 1 1 0"
+    client:
+        image: mklean/baseline-microsuite:hdsearch_router_setalgebra_recommend
+        #networks:
+        #  - outside
+        stdin_open: true # docker run -i
+        tty: true # docker run -t
+        volumes:
+            - /users/cseas002/HDSearch-Multinode/microsuite_files/:/home/data
+            - /mydata/HDSearch/:/home/
+        cap_add:
+            - SYS_PTRACE
+        deploy:
+            restart_policy:
+                condition: none
+            placement:
+                constraints: [ "node.hostname == ${NODE0}" ]
+        command: >
+            bash -c "
+                    echo 'client start'
+                    #wget https://akshithasriraman.eecs.umich.edu/dataset/HDSearch/image_feature_vectors.dat
+                    mv image_feature_vectors.dat /home
+                    #wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/load_generator_open_loop_time.cc
+                    cp /home/load_generator_open_loop_time.cc /MicroSuite/src/HDSearch/load_generator/load_generator_open_loop.cc
+                    #wget https://raw.githubusercontent.com/georgiantoniou/HDSearch/main/microsuite/mid_tier_client_helper.cc
+                    cp /home/mid_tier_client_helper.cc /MicroSuite/src/HDSearch/load_generator/helper_files/
+                    cd /MicroSuite/src/HDSearch/load_generator
+                    make clean
+                    make
+                    while ! echo exit | nc midtier 

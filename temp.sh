@@ -4,7 +4,7 @@ do
 sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-cd ~/HDSearch-Multinode/
+cd /users/cseas002/HDSearch-Multinode/
 bash hdsearch-multinode.sh build_install
 
 nohup python3 run_experiment.py TEST3 >> 3test.out &

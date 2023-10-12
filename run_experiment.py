@@ -251,7 +251,7 @@ def configure_hdsearch_node(conf):
                 os.system('ssh -n {} "/users/cseas002/HDSearch-Multinode/turbo-boost.sh disable"'.format(node))
     return bucket,midtier
 
-def run_socwatch(name):  # Georgia you has an extra parameter here named "conf"
+def run_socwatch(name):  # Georgia you had an extra parameter here named "conf"
     extravars = ['MONITOR_TIME=40', 'OUTPUT_FILE={}'.format(name)]
     run_ansible_playbook(inventory='hosts', extravars=extravars, playbook='./ansible/profiler.yml', tags='run_socwatch')
 
@@ -276,7 +276,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     
     if profiler_output != 0:
         return profiler_output
-    print("Profilerrrrr putput " + str(profiler_output))
+    print("Profilerrrrr output " + str(profiler_output))
     
     # exit()
     # Added function 
@@ -320,20 +320,20 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     rawoutput=exec_command("sudo docker service logs microsuite_client --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
     exec_command("sudo chmod 777 {}".format(client_results_path_name))
-    with open(client_results_path_name, 'w') as fo:
-        for l in rawoutput:
-            fo.write(safeStr(l)+'\n')
+    # with open(client_results_path_name, 'w') as fo:
+    #     for l in rawoutput:
+    #         fo.write(safeStr(l)+'\n')
     
     # cleanup
     kill_remote()
-    kill_profiler(bucket,midtier)
+    # kill_profiler(bucket,midtier)
 
     return 0
 
 def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter):
     # bucket,midtier=configure_hdsearch_node(system_conf)
     install_script_run()
-    set_profiler_hosts()
+    # set_profiler_hosts()
     leave_swarm()
     init_manager()
     init_worker()
@@ -346,7 +346,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [0.01]
+    request_qps = [0.01, 0.05]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
