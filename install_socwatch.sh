@@ -11,7 +11,7 @@ sudo apt update;
 sudo apt install intel-oneapi-vtune -y;'
 # I added this to make it tickless
 # ssh -A $node "sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\"/\1 nohz=on\"/' /etc/default/grub;
-ssh -A $node "sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\"/\1 nohz_full\"/' /etc/default/grub;
+ssh -A $node "sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\"/\1 nohz_full=1-10\"/' /etc/default/grub;
 sudo update-grub;
 sudo reboot;"
 done
