@@ -109,6 +109,8 @@ done
 
 for item in ${bucket_nodes[*]};
 do
+    echo "irtaaaaaaa"
+    echo $item
     sudo python3 /users/cseas002/HDSearch-Multinode/profiler/profiler.py -n $item start
     
     echo $item

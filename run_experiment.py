@@ -292,8 +292,8 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     
 
     # COMMENTED OUT THESE TWO LINES
-    # stop_profiler(bucket,midtier)
-    # report_profiler(bucket,midtier,hdsearch_results_dir_path)
+    stop_profiler(bucket,midtier)
+    report_profiler(bucket,midtier,hdsearch_results_dir_path)
     
     
     # Calling script
@@ -320,13 +320,13 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     rawoutput=exec_command("sudo docker service logs microsuite_client --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
     exec_command("sudo chmod 777 {}".format(client_results_path_name))
-    # with open(client_results_path_name, 'w') as fo:
-    #     for l in rawoutput:
-    #         fo.write(safeStr(l)+'\n')
+    with open(client_results_path_name, 'w') as fo:
+        for l in rawoutput:
+            fo.write(safeStr(l)+'\n')
     
     # cleanup
     kill_remote()
-    # kill_profiler(bucket,midtier)
+    kill_profiler(bucket,midtier)
 
     return 0
 
@@ -346,7 +346,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [0.01, 0.05]
+    request_qps = [1, 0.01, 0.05]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
