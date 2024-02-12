@@ -272,7 +272,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
     run_remote(client_conf)
     profiler_output = 0
     # COMMENTED OUT THIS LINE AND REPLACED IT WITH THE LINE ABOVE
-    # profiler_output = run_profiler(idx)
+    profiler_output = run_profiler(idx)
     
     if profiler_output != 0:
         return profiler_output
@@ -317,6 +317,7 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
 
 
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
+    exec_command('sudo mkdir {}'.format(results_dir_path))
     rawoutput=exec_command("sudo docker service logs microsuite_client --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
     exec_command("sudo chmod 777 {}".format(client_results_path_name))
@@ -343,6 +344,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     # time.sleep(500)
     name_prefix = "turbo={}-kernelconfig={}-{}-hyperthreading={}-".format(system_conf['turbo'], system_conf['kernelconfig'][0],system_conf['kernelconfig'][1],system_conf['ht'])
     # request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
+    name_prefix = ""
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
