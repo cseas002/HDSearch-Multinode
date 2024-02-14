@@ -344,11 +344,10 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     # time.sleep(500)
     name_prefix = "turbo={}-kernelconfig={}-{}-hyperthreading={}-".format(system_conf['turbo'], system_conf['kernelconfig'][0],system_conf['kernelconfig'][1],system_conf['ht'])
     # request_qps = [500, 1000, 2000, 4000, 6000, 7000, 8000]
-    name_prefix = ""
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [1, 0.01, 0.05]
+    request_qps = [100, 200, 1000, 5000]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
@@ -373,6 +372,10 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
     leave_swarm()
 
 def main(argv):
+    # Added code to run the server
+    exec_command("bash run_server.sh start")
+
+
     # kernelconfig first argument is for midtier and second for bucket server
     system_confs = [
           #{'turbo': False, 'kernelconfig': ['disable_cstates', 'disable_cstates'], 'ht': False},
@@ -440,6 +443,8 @@ def main(argv):
     for iter in range(0, 5):
         for system_conf in system_confs:
             run_multiple_experiments('/users/cseas002/data', batch_name, system_conf, client_conf, midtier_conf, bucket_conf, iter)
+    
+    exec_command("bash run_server.sh stop")
 
 
 if __name__ == '__main__':

@@ -31,6 +31,7 @@ build_install () {
   install_dep
   build
   ansible-playbook -v -i hosts ansible/install.yml
+  bash setup.sh
   echo "irtaaaaaaaaaa"
 }
 
