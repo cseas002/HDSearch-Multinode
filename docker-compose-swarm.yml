@@ -162,7 +162,7 @@ services:
                 echo 'profilers launched'
                 cd /MicroSuite/src/HDSearch/load_generator
                 mkdir ./results
-                ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 5000 midtier:50054 dummy1 dummy2 dummy3"
+                ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 100 midtier:50054 dummy1 dummy2 dummy3"
 #networks:
 #  outside:
 #    external:

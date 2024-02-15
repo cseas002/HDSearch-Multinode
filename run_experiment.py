@@ -375,6 +375,8 @@ def main(argv):
     # Added code to run the server
     exec_command("bash run_server.sh start")
 
+    print("Servers started", flush=True)
+
 
     # kernelconfig first argument is for midtier and second for bucket server
     system_confs = [
