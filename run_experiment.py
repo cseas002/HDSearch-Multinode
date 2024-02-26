@@ -317,12 +317,23 @@ def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf
 
 
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
+    midtier_results_path_name = os.path.join(results_dir_path, 'hdsearch_midtier')
     exec_command('sudo mkdir {}'.format(results_dir_path))
-    rawoutput=exec_command("sudo docker service logs microsuite_client --raw")
+
+    # Get client logs
+    rawoutput_client=exec_command("sudo docker service logs microsuite_client --raw")
+    # Get midtier logs
+    rawoutput_midtier=exec_command("sudo docker service logs microsuite_midtier --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
     exec_command("sudo chmod 777 {}".format(client_results_path_name))
+    exec_command("sudo touch {}".format(midtier_results_path_name))
+    exec_command("sudo chmod 777 {}".format(midtier_results_path_name))
     with open(client_results_path_name, 'w') as fo:
-        for l in rawoutput:
+        for l in rawoutput_client:
+            fo.write(safeStr(l)+'\n')
+
+    with open(midtier_results_path_name, 'w') as fo:
+        for l in rawoutput_midtier:
             fo.write(safeStr(l)+'\n')
     
     # cleanup
@@ -347,7 +358,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [100, 200, 1000, 5000]
+    request_qps = [0.1, 1, 10, 50000]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0

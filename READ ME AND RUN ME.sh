@@ -37,4 +37,4 @@ done
 
 cd /users/cseas002/HDSearch-Multinode/
 bash hdsearch-multinode.sh build_install
-python3 run_experiment.py TEST
+nohup python3 run_experiment.py > midtier_change.txt MIDTIER_CHANGE &

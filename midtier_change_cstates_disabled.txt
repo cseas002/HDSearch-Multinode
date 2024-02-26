@@ -1,0 +1,174 @@
+Servers started
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Install HDSearch] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+PLAY [Set Up Docker Curl] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node0]
+ok: [node1]
+
+PLAY [Make space to commit] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+ok: [node2]
+ok: [node1]
+
+TASK [Make Space to Commit Image] **********************************************
+changed: [node1] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:02.949639", "end": "2024-02-26 16:11:47.081462", "msg": "", "rc": 0, "start": "2024-02-26 16:11:44.131823", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node0] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:03.547345", "end": "2024-02-26 15:11:47.684099", "msg": "", "rc": 0, "start": "2024-02-26 15:11:44.136754", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+changed: [node2] => {"changed": true, "cmd": ["sudo", "/users/cseas002/HDSearch-Multinode/scripts/change-storage-location-docker.sh"], "delta": "0:00:03.656630", "end": "2024-02-26 16:11:47.786019", "msg": "", "rc": 0, "start": "2024-02-26 16:11:44.129389", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]\n\nRemove one or more containers\n\"docker rmi\" requires at least 1 argument.\nSee 'docker rmi --help'.\n\nUsage:  docker rmi [OPTIONS] IMAGE [IMAGE...]\n\nRemove one or more images\nWarning: Stopping docker.service, but it can still be activated by:\n  docker.socket\nmkdir: cannot create directory ‘/dev/mkdocker’: File exists", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]", "", "Remove one or more containers", "\"docker rmi\" requires at least 1 argument.", "See 'docker rmi --help'.", "", "Usage:  docker rmi [OPTIONS] IMAGE [IMAGE...]", "", "Remove one or more images", "Warning: Stopping docker.service, but it can still be activated by:", "  docker.socket", "mkdir: cannot create directory ‘/dev/mkdocker’: File exists"], "stdout": "", "stdout_lines": []}
+
+PLAY [Install Profiler Dep] ****************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+ok: [node0]
+
+TASK [Leave Swarm] *************************************************************
+changed: [node2] => {"ansible_job_id": "434522003876.161448", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/434522003876.161448", "started": 1}
+changed: [node1] => {"ansible_job_id": "205881082929.142017", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/205881082929.142017", "started": 1}
+changed: [node0] => {"ansible_job_id": "499801661329.2759651", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/499801661329.2759651", "started": 1}
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Init Master] *************************************************************
+changed: [node0] => {"changed": true, "cmd": "sudo docker swarm init --advertise-addr 10.10.1.1", "delta": "0:00:00.573957", "end": "2024-02-26 15:11:56.435418", "msg": "", "rc": 0, "start": "2024-02-26 15:11:55.861461", "stderr": "", "stderr_lines": [], "stdout": "Swarm initialized: current node (r4v0vr8rtf8tnnls0s0fcwpvq) is now a manager.\n\nTo add a worker to this swarm, run the following command:\n\n    docker swarm join --token SWMTKN-1-4ylhochx8bpzeu75zrbp14ndtiyzjrngnlq8a5sc92ooftxbtc-d7oubx2h3p59p5oev5szu9s6n 10.10.1.1:2377\n\nTo add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.", "stdout_lines": ["Swarm initialized: current node (r4v0vr8rtf8tnnls0s0fcwpvq) is now a manager.", "", "To add a worker to this swarm, run the following command:", "", "    docker swarm join --token SWMTKN-1-4ylhochx8bpzeu75zrbp14ndtiyzjrngnlq8a5sc92ooftxbtc-d7oubx2h3p59p5oev5szu9s6n 10.10.1.1:2377", "", "To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions."]}
+
+PLAY [Initialize workers] ******************************************************
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node0                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Initialize cluster manager] **********************************************
+
+PLAY [Initialize workers] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node2]
+ok: [node1]
+
+TASK [Init Workers] ************************************************************
+changed: [node2] => {"ansible_job_id": "204312147184.161639", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/204312147184.161639", "started": 1}
+changed: [node1] => {"ansible_job_id": "816091902513.142218", "changed": true, "finished": 0, "results_file": "/users/cseas002/.ansible_async/816091902513.142218", "started": 1}
+
+PLAY [Check Status of run] *****************************************************
+
+PLAY [Leave Swarm] *************************************************************
+
+PLAY RECAP *********************************************************************
+node1                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+
+PLAY [Set uncore frequency] ****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+ok: [node2]
+
+TASK [Load msr kernel module] **************************************************
+changed: [node1] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.005103", "end": "2024-02-26 16:12:05.899048", "msg": "", "rc": 0, "start": "2024-02-26 16:12:05.893945", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node2] => {"changed": true, "cmd": "modprobe msr", "delta": "0:00:00.005134", "end": "2024-02-26 16:12:05.901732", "msg": "", "rc": 0, "start": "2024-02-26 16:12:05.896598", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+TASK [Set uncore freq] *********************************************************
+changed: [node2] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.003858", "end": "2024-02-26 16:12:06.348023", "msg": "", "rc": 0, "start": "2024-02-26 16:12:06.344165", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+changed: [node1] => {"changed": true, "cmd": "wrmsr -p0 0x620 0x1414", "delta": "0:00:00.003870", "end": "2024-02-26 16:12:06.388330", "msg": "", "rc": 0, "start": "2024-02-26 16:12:06.384460", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+node2                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Nothing found in stack: microsuite
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+PLAY [Kill remote profiler] ****************************************************
+
+PLAY RECAP *********************************************************************
+
+INFO:root:ssh -A node0 hostname
+INFO:root:node0.hdsearch2.ucy-cs499-dc-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node1 hostname
+INFO:root:node1.hdsearch2.ucy-cs499-dc-pg0.wisc.cloudlab.us
+INFO:root:ssh -A node2 hostname
+INFO:root:node2.hdsearch2.ucy-cs499-dc-pg0.wisc.cloudlab.us
+Ignoring deprecated options:
+
+expose: Exposing ports is unnecessary - services on the same network can access each other's containers on any port.
+
+Creating network microsuite_default
+Creating service microsuite_client
+Creating service microsuite_bucket
+Creating service microsuite_midtier
+Using /users/cseas002/HDSearch-Multinode/ansible.cfg as config file
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(hosts). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tags). Using last defined value only.
+[WARNING]: While constructing a mapping from /users/cseas002/HDSearch-
+Multinode/ansible/profiler.yml, line 20, column 3, found a duplicate dict key
+(tasks). Using last defined value only.
+
+PLAY [Set profiler] ************************************************************
+
+PLAY [Run remote profiler] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node0]
+
+TASK [Run remote profiler] *****************************************************

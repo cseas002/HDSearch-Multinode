@@ -27,7 +27,7 @@
 #include <signal.h>
 #include <math.h>
 #include <stdbool.h>
-#include <gsl/gsl_randist.h>
+// #include <gsl/gsl_randist.h>
 #define PORT 8080
 #define PORT2 8081
 
@@ -35,167 +35,6 @@
 void sigpipe_handler(int signo)
 {
     // Do nothing, just ignore the signal
-}
-
-void readParameters(const char *filename, char **serv_addr_ip, int *sleep_usecs, int *repetitions, bool *poisson, bool *exponential, bool *fixed, bool *pre_request, int *pre_request_interval, int *warmup_requests)
-{
-    FILE *param_file = fopen(filename, "r");
-    if (param_file == NULL)
-    {
-        perror("Error opening parameter file");
-        exit(EXIT_FAILURE);
-    }
-
-    char param_name[20];
-    char param_value[20];
-    *poisson = false;
-    *fixed = false;
-    *exponential = false;
-    *pre_request = false;
-    *warmup_requests = 0;
-
-    // Read parameters from the file
-    while (fscanf(param_file, "%s %s", param_name, param_value) == 2)
-    {
-        if (strcmp(param_name, "server_ip") == 0)
-        {
-            *serv_addr_ip = strdup(param_value);
-        }
-        else if (strcmp(param_name, "sleep_usecs") == 0)
-        {
-            *sleep_usecs = atoi(param_value);
-        }
-        else if (strcmp(param_name, "repetitions") == 0)
-        {
-            *repetitions = atoi(param_value);
-        }
-        else if (strcmp(param_name, "distribution") == 0)
-        {
-            if (strcmp(param_value, "poisson") == 0)
-            {
-                *poisson = true;
-            }
-            else if (strcmp(param_value, "fixed") == 0)
-            {
-                *fixed = true;
-            }
-            else if (strcmp(param_value, "exponential") == 0)
-            {
-                *exponential = true;
-            }
-            else
-            {
-                fprintf(stderr, "Choose from poisson, exponential, fixed\n");
-                exit(EXIT_FAILURE);
-            }
-        }
-        else if (strcmp(param_name, "pre_request") == 0)
-        {
-            if (strcmp(param_value, "true") == 0)
-            {
-                *pre_request = true;
-            }
-            else if (strcmp(param_value, "false") == 0)
-            {
-                *pre_request = false;
-            }
-        }
-        else if (strcmp(param_name, "pre_request_interval") == 0)
-        {
-            *pre_request_interval = atoi(param_value);
-        }
-        else if (strcmp(param_name, "warmup_requests") == 0)
-        {
-            *warmup_requests = atoi(param_value);
-        }
-    }
-
-    if ((*exponential && *fixed) || (*exponential && *poisson) || (*fixed && *poisson))
-    {
-        fprintf(stderr, "Cannot combine fixed, exponential, and poisson\nFixed: %d, Poisson: %d, Exponential: %d", *fixed, *poisson, *exponential);
-        fprintf(stderr, "Choose from poisson, exponential, fixed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (!(*fixed || *poisson || *exponential))
-    {
-        fprintf(stderr, "Set one from fixed, poisson and exponential\n");
-        fprintf(stderr, "Choose from poisson, exponential, fixed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    fclose(param_file);
-}
-
-// Function to generate random numbers from an exponential distribution
-int generateExponential(int average)
-{
-    if (average == 0)
-    {
-        return 0;
-    }
-    double lambda = 1 / (double)average;
-    double u = (double)rand() / RAND_MAX;
-    return (int)(-log(1 - u) / lambda);
-}
-
-int *get_poisson_numbers(int repetitions, int sleep_usecs)
-{
-    // Construct the command to execute the Python script with parameters
-    char command[100];
-    snprintf(command, sizeof(command), "python3 poisson.py %d %d", repetitions, sleep_usecs);
-
-    // Execute the Python script
-    int status = system(command);
-
-    if (status == 0)
-    {
-        // printf("Python script executed successfully.\n");
-
-        // Read Poisson numbers from the file
-        FILE *file = fopen("poisson_numbers.txt", "r");
-        if (file == NULL)
-        {
-            fprintf(stderr, "Error opening file poisson_numbers.txt\n");
-            exit(EXIT_FAILURE);
-        }
-
-        // Count the number of lines in the file
-        int count = 0;
-        int c;
-        while ((c = fgetc(file)) != EOF)
-        {
-            if (c == '\n')
-            {
-                count++;
-            }
-        }
-
-        // Allocate memory for the array
-        int *poisson_numbers = (int *)malloc(count * sizeof(int));
-        if (poisson_numbers == NULL)
-        {
-            fprintf(stderr, "Error allocating memory\n");
-            exit(EXIT_FAILURE);
-        }
-
-        // Rewind the file and read numbers into the array
-        rewind(file);
-        for (int i = 0; i < count; ++i)
-        {
-            fscanf(file, "%d", &poisson_numbers[i]);
-        }
-
-        // Close the file
-        fclose(file);
-
-        return poisson_numbers;
-    }
-    else
-    {
-        fprintf(stderr, "Error executing Python script.\n");
-        exit(EXIT_FAILURE);
-    }
 }
 
 int send_request(bool read_message, int client_fd, char *hello, char *buffer, int port)
@@ -510,20 +349,9 @@ int main(int argc, char **argv)
     char *hello = "Hello from client";
     char buffer[30] = {0};
 
-    char *serv_addr_ip;
+    char *serv_addr_ip = "10.10.1.2";
     int sleep_usecs;
-    int repetitions;
-    int pre_request_interval = 0;
     int warmup_requests = 0;
-
-    // Read parameters from the file using the function
-    readParameters('parameters.txt', &serv_addr_ip, &sleep_usecs, &repetitions, &poisson, &exponential, &fixed, &pre_request, &pre_request_interval, &warmup_requests);
-
-    printf("Parameters:\nServer IP address: %s\nSleep microseconds: %d\nRepetitions: %d\nSend Pre request: %d\nPre-Request interval: %d\n", serv_addr_ip, sleep_usecs, repetitions, pre_request, pre_request_interval);
-    char *distribution = (fixed) ? "Fixed" : (poisson) ? "Poisson"
-                                                       : "Exponential";
-
-    printf("Distribution: %s\nWarmup Requests: %d\n\n\n", distribution, warmup_requests);
 
     // Create socket for port 8080
     if ((client_fd1 = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -549,41 +377,8 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    // Create socket for port 8081
-    // if ((client_fd2 = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    // {
-    //     printf("\n Socket creation error for port 8081\n");
-    //     return -1;
-    // }
-
-    // serv_addr2.sin_family = AF_INET;
-    // serv_addr2.sin_port = htons(PORT2);
-
-    // // Convert IPv4 and IPv6 addresses from text to binary
-    // if (inet_pton(AF_INET, serv_addr_ip, &serv_addr2.sin_addr) <= 0)
-    // {
-    //     printf("\nInvalid address/ Address not supported \n");
-    //     return -1;
-    // }
-
-    // // Connect to port 8081
-    // if ((status = connect(client_fd2, (struct sockaddr *)&serv_addr2, sizeof(serv_addr2))) < 0)
-    // {
-    //     printf("\nConnection Failed to port 8081\n");
-    //     return -1;
-    // }
-
     signal(SIGPIPE, sigpipe_handler);
     long time_taken, total_time = 0;
-
-    // Additional variables for latency measurement
-    long *latency_array = malloc(repetitions * sizeof(long));
-    if (latency_array == NULL)
-    {
-        fprintf(stderr, "Memory allocation failed\n");
-        return 1;
-    }
-
     // End of pre-request code
 
     /* Get path to queries (batch/single) and the number of
@@ -799,8 +594,6 @@ int main(int argc, char **argv)
         if (pre_request)
         {
             time_taken = send_request(false, client_fd1, hello, buffer, 8080);
-            if (time_taken == -1)
-                break;
         }
         usleep(next_time - curr_time); // Sleep for (next_time - curr_time) microseconds, and then proceed
         curr_time = (double)GetTimeInMicro();
