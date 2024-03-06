@@ -1,11 +1,11 @@
-curl 'https://uc8549a2d74bbbcf70579bcd66c5.dl.dropboxusercontent.com/cd/0/get/CNHFMrzrYt9WhVIAvoSysALTVlvnT4cxJvy1n5cjqnp5cwnyTYP_tCLo8p6s9UcsCBdgygeWtN4wL9EFTTVHYE12BreRo0zi_k8xM1Gzn3GBorokoypYDB9_GODJprHiVazv-IR0z-3upfLVMWNNamITzhEN-txogg2wFDrCf8ZUUA/file?_download_id=90378392951427182527942368102092197594712249607129924562630242992&_notify_domain=www.dropbox.com&dl=1' \
-  -H 'authority: uc8549a2d74bbbcf70579bcd66c5.dl.dropboxusercontent.com' \
+curl 'https://ucd20a325d917419cd992190e646.dl.dropboxusercontent.com/cd/0/get/COaPvEQSepXkPCmbhD4a15BpmRvBAXowDvF8tCnrL-mZxVAb5kw3soNveBlOGImz0eUKI3qpQq4Yu67JMKU5T3XeaH3tEo1xkxgIuSGjsTzkkEMGR9WumR6u2YGG_GEfpC0XpJIyojPb9X6Mg5QZWy2GWgAq2kC7gxER41GAi7J4tA/file?_download_id=80249567392515454121396336546221464309608950862086823326812831698&_notify_domain=www.dropbox.com&dl=1' \
+  -H 'authority: ucd20a325d917419cd992190e646.dl.dropboxusercontent.com' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'cache-control: no-cache' \
   -H 'pragma: no-cache' \
   -H 'referer: https://www.dropbox.com/' \
-  -H 'sec-ch-ua: "Not A(Brand";v="99", "Microsoft Edge";v="121", "Chromium";v="121"' \
+  -H 'sec-ch-ua: "Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"' \
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "Windows"' \
   -H 'sec-fetch-dest: iframe' \
@@ -13,8 +13,8 @@ curl 'https://uc8549a2d74bbbcf70579bcd66c5.dl.dropboxusercontent.com/cd/0/get/CN
   -H 'sec-fetch-site: cross-site' \
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
-  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0' \
-  --compressed --output HDSearch-dataset.tgz
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0' \
+  --output HDSearch-dataset.tgz
 
 tar -xzvf HDSearch-dataset.tgz
 rm HDSearch-dataset.tgz

@@ -358,7 +358,7 @@ def run_multiple_experiments(root_results_dir, batch_name, system_conf, client_c
 
     # I can change this list 
     # request_qps = [1, 2, 5, 10, 20, 30, 50, 100]
-    request_qps = [0.1, 1, 10, 50000]
+    request_qps = [100, 1000, 5000]
     root_results_dir = os.path.join(root_results_dir, batch_name)
     set_uncore_freq(system_conf, 2000)
     #timetorun=0
@@ -440,7 +440,7 @@ def main(argv):
     bucket_conf = common.Configuration({
         'dataset_filepath': '/home/image_feature_vectors.dat',
         'IP': ['0.0.0.0'],
-        'port': ['50050', '50051', '50052', '50053'],
+        'port': ['50050'],  # THIS CHANGED FROM ['50050', '50051', '50052', '50053']
         'readmode': '2',
         'threads': '1',
         'bucket_id': ['0', '1', '2', '3'],

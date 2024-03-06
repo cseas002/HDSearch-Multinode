@@ -599,9 +599,10 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     if (pre_request)
     {
         send_request(false, client_fd1, hello, buffer, 8080);
-        printf("Pre-request sent\n");
+        // printf("Pre-request sent\n");
     }
 
+    uint64_t beginning_time = GetTimeInMicro();
     uint64_t s1 = 0, e1 = 0;
     s1 = GetTimeInMicro();
     if (!started->AtomicallyReadFlag())
@@ -720,6 +721,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     response_count_down_map[unique_request_id_value].index_reply->set_get_bucket_responses_time(GetTimeInMicro());
     // map_fine_mutex[unique_request_id_value]->unlock();
 
+    printf("Time taken: %ld\n", GetTimeInMicro() - beginning_time);
     for (int i = 0; i < number_of_bucket_servers; i++)
     {
         int index = (tid * number_of_bucket_servers) + i;
