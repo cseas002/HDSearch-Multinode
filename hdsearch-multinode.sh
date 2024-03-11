@@ -17,6 +17,8 @@ install_dep () {
   sudo apt-add-repository ppa:ansible/ansible -y
   sudo apt update
   sudo apt install ansible -y
+  # bash setup.sh
+  # bash install_socwatch.sh
   ansible-playbook -i hosts ansible/install_dep.yml
 }
 
@@ -31,7 +33,6 @@ build_install () {
   install_dep
   build
   ansible-playbook -v -i hosts ansible/install.yml
-  bash setup.sh
   echo "irtaaaaaaaaaa"
 }
 
