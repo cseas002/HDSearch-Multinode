@@ -2,7 +2,9 @@
 
 for node in node2 node1 node0
 do
-ssh -A $node 'sudo env RESIZEROOT=200 ./grow-rootfs.sh;
+scp grow-rootfs.sh $node:~/
+ssh -A $node 'chmod +x grow-rootfs.sh;
+sudo env RESIZEROOT=200 ./grow-rootfs.sh;
 wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null;
 echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list;
 sudo apt-get update;
