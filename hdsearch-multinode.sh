@@ -17,8 +17,8 @@ install_dep () {
   sudo apt-add-repository ppa:ansible/ansible -y
   sudo apt update
   sudo apt install ansible -y
-  # bash setup.sh
-  # bash install_socwatch.sh
+  bash setup.sh
+  bash install_socwatch.sh
   ansible-playbook -i hosts ansible/install_dep.yml
 }
 

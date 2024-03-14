@@ -1,19 +1,17 @@
-curl 'https://ucd20a325d917419cd992190e646.dl.dropboxusercontent.com/cd/0/get/COaPvEQSepXkPCmbhD4a15BpmRvBAXowDvF8tCnrL-mZxVAb5kw3soNveBlOGImz0eUKI3qpQq4Yu67JMKU5T3XeaH3tEo1xkxgIuSGjsTzkkEMGR9WumR6u2YGG_GEfpC0XpJIyojPb9X6Mg5QZWy2GWgAq2kC7gxER41GAi7J4tA/file?_download_id=80249567392515454121396336546221464309608950862086823326812831698&_notify_domain=www.dropbox.com&dl=1' \
-  -H 'authority: ucd20a325d917419cd992190e646.dl.dropboxusercontent.com' \
+curl 'https://uc957d3cfd4ce4e9a2a7693b596f.dl.dropboxusercontent.com/cd/0/get/CO594HidQMaouO-dy2Ui5R-GYLfEwk_fd0wbTvLt-NbX9uYMu0qlCe6jzvxmU_fuOe4Tw-NU5i5-IO7JD8q7trT-QnCi8n07Wk0jB3RH0LJl7X_giYtUcdzT-tSf6Y_-kvKQ9WIEz2dI-R9TtqYdJ-FMyEwE3kuO2VbBwrR3-hjWDw/file?_download_id=54011573735578952279416289084949949853881837179620392379633633&_notify_domain=www.dropbox.com&dl=1' \
+  -H 'authority: uc957d3cfd4ce4e9a2a7693b596f.dl.dropboxusercontent.com' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
-  -H 'accept-language: en-US,en;q=0.9' \
-  -H 'cache-control: no-cache' \
-  -H 'pragma: no-cache' \
+  -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8' \
   -H 'referer: https://www.dropbox.com/' \
-  -H 'sec-ch-ua: "Chromium";v="122", "Not(A:Brand";v="24", "Microsoft Edge";v="122"' \
+  -H 'sec-ch-ua: "Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"' \
   -H 'sec-ch-ua-mobile: ?0' \
-  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-ch-ua-platform: "macOS"' \
   -H 'sec-fetch-dest: iframe' \
   -H 'sec-fetch-mode: navigate' \
   -H 'sec-fetch-site: cross-site' \
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
-  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36' \
   --output HDSearch-dataset.tgz
 
 tar -xzvf HDSearch-dataset.tgz
@@ -37,4 +35,4 @@ done
 
 cd /users/cseas002/HDSearch-Multinode/
 bash hdsearch-multinode.sh build_install
-nohup python3 run_experiment.py > midtier_change.txt MIDTIER_CHANGE &
+# nohup python3 run_experiment.py > exponential_run.txt EXPONENTIAL_RUN &

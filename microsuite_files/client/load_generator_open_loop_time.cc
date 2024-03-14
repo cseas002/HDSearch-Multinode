@@ -490,15 +490,26 @@ int main(int argc, char **argv)
 
     // std::uniform_int_distribution<> distribution_run(center);
 
+    printf("Experiment duration: %lu\n", time_duration);
+
+    exponential = true;
     center = 1000000.0 / (double)(qps);
     // Declare the poisson distribution
     std::default_random_engine generator_run;
+    std::exponential_distribution<double> distribution_run(center);
     // CHANGE
     // std::poisson_distribution<int> distribution_run(center);
-
     curr_time = (double)GetTimeInMicro();
     exit_time = curr_time + (double)(time_duration * 1000000);
-    next_time = curr_time + center; // distribution_run(generator_run) + curr_time;
+    if (exponential)
+    {
+        next_time = curr_time + distribution_run(generator_run);
+    }
+    else
+    {
+        next_time = curr_time + center; // distribution_run(generator_run) + curr_time;
+    }
+
     // The next time is the current + center
     index = rand() % queries_size;
     //!!!!!!!Actual Run !!!!!!!
@@ -551,6 +562,15 @@ int main(int argc, char **argv)
 
     while (curr_time < exit_time)
     {
+        // If it's set to send a pre-request, then send a pre-request to wake up
+        if (pre_request)
+        {
+            time_taken = send_request(false, client_fd1, hello, buffer, 8080);
+        }
+        usleep(next_time - curr_time); // Sleep for (next_time - curr_time) microseconds, and then proceed
+        curr_time = (double)GetTimeInMicro();
+
+        // Send the actual request
         if (curr_time >= next_time)
         {
             num_requests->AtomicallyIncrementCount();
@@ -582,21 +602,21 @@ int main(int argc, char **argv)
                                             false);
             }
             // CHANGE
-            next_time = curr_time + center; // distribution_run(generator_run) + curr_time;
+            if (exponential)
+            {
+                next_time = curr_time + distribution_run(generator_run);
+            }
+            else
+            {
+                next_time = curr_time + center; // distribution_run(generator_run) + curr_time;
+            }
+
             printf("Curr time = %lf\n", curr_time);
             printf("Next time = %lf\n", next_time);
             index = rand() % queries_size;
 
             query.SetPoint(0, queries.GetPointAtIndex(index));
         }
-
-        // If it's set to send a pre-request, then send a pre-request to wake up
-        if (pre_request)
-        {
-            time_taken = send_request(false, client_fd1, hello, buffer, 8080);
-        }
-        usleep(next_time - curr_time); // Sleep for (next_time - curr_time) microseconds, and then proceed
-        curr_time = (double)GetTimeInMicro();
     }
     /*std::string qps_file_name_final = qps_file_name + std::to_string(qps) + ".txt";
       std::ofstream qps_file(qps_file_name_final);
