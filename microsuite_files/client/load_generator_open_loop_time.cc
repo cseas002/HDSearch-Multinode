@@ -496,7 +496,7 @@ int main(int argc, char **argv)
     center = 1000000.0 / (double)(qps);
     // Declare the poisson distribution
     std::default_random_engine generator_run;
-    std::exponential_distribution<double> distribution_run(center);
+    std::exponential_distribution<double> distribution_run((double)qps);
     // CHANGE
     // std::poisson_distribution<int> distribution_run(center);
     curr_time = (double)GetTimeInMicro();
