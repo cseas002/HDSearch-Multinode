@@ -496,7 +496,7 @@ int main(int argc, char **argv)
     center = 1000000.0 / (double)(qps);
     // Declare the poisson distribution
     std::default_random_engine generator_run;
-    std::exponential_distribution<double> distribution_run((double)qps);
+    std::exponential_distribution<double> distribution_run((double)qps / 1000000);
     // CHANGE
     // std::poisson_distribution<int> distribution_run(center);
     curr_time = (double)GetTimeInMicro();
@@ -612,7 +612,7 @@ int main(int argc, char **argv)
             }
 
             printf("Curr time = %lf\n", curr_time);
-            printf("Next time = %lf\n", next_time);
+            // printf("Next time = %lf\n", next_time);
             index = rand() % queries_size;
 
             query.SetPoint(0, queries.GetPointAtIndex(index));

@@ -14,6 +14,10 @@
 #include "mid_tier_service/service/helper_files/timing.h"
 #include "mid_tier_service/service/helper_files/utils.h"
 
+// Helper thread code
+#include <atomic>
+#include <chrono>
+
 // Pre-request code
 
 #include <arpa/inet.h>
@@ -28,6 +32,9 @@
 // #include <gsl/gsl_randist.h>
 #define PORT 8080
 #define PORT2 8081
+
+int send_request_time;
+bool pre_request = true;
 
 // Signal handler for SIGPIPE
 void sigpipe_handler(int signo)
@@ -97,6 +104,31 @@ void print_statistics(int repetitions, long *latency_array)
 }
 
 // End of pre-request code
+
+// Helper thread code
+
+// Define a global atomic flag
+std::atomic<bool> sendRequestFlag(false);
+
+// Function to be executed by the helper thread
+void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
+{
+    while (true)
+    {
+        // Wait until the flag is set to true
+        while (!sendRequestFlag.load(std::memory_order_acquire))
+        {
+        }
+
+        // Once the flag is set, send the request
+        send_request(false, client_fd1, hello, buffer, port);
+
+        // Reset the flag
+        sendRequestFlag.store(false, std::memory_order_release);
+    }
+}
+
+// End of helper thread code
 
 #define FIXEDCOMP 10
 
@@ -594,11 +626,11 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     char *hello = "Hello from client";
     char buffer[30] = {0};
     // SEND PRE-REQUEST HERE
-    bool pre_request = true;
 
-    if (pre_request)
+    if (pre_request && send_request_time == 0)
     {
-        send_request(false, client_fd1, hello, buffer, 8080);
+        sendRequestFlag.store(true, std::memory_order_release);
+        // send_request(false, client_fd1, hello, buffer, 8080);
         // printf("Pre-request sent\n");
     }
 
@@ -623,6 +655,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     map_coarse_mutex.unlock();
 
     map_fine_mutex[unique_request_id_value]->lock();
+
     if (load_gen_request.kill())
     {
         kill_signal = true;
@@ -696,6 +729,14 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     std::vector<std::vector<std::vector<uint32_t>>> point_ids_for_all_bucket_servers(number_of_bucket_servers, point_ids);
 
     start_time = GetTimeInMicro();
+
+    if (pre_request && send_request_time == 1)
+    {
+        sendRequestFlag.store(true, std::memory_order_release);
+        // send_request(false, client_fd1, hello, buffer, 8080);
+        // printf("Pre-request sent\n");
+        printf("Short time taken: %ld\n", GetTimeInMicro() - beginning_time);
+    }
     for (unsigned int i = 0; i < number_of_bucket_servers; i++)
     {
         int bucket_server_id = i;
@@ -721,7 +762,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     response_count_down_map[unique_request_id_value].index_reply->set_get_bucket_responses_time(GetTimeInMicro());
     // map_fine_mutex[unique_request_id_value]->unlock();
 
-    printf("Time taken: %ld\n", GetTimeInMicro() - beginning_time);
+    printf("Full time taken: %ld\n", GetTimeInMicro() - beginning_time);
     for (int i = 0; i < number_of_bucket_servers; i++)
     {
         int index = (tid * number_of_bucket_servers) + i;
@@ -889,10 +930,13 @@ void Tcpretrans()
 int main(int argc, char **argv)
 {
     // Pre-request code
-
     int status, valread, client_fd2;
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
+
+    send_request_time = 1; // atoi(argv[1]); // I added an argument that it's the send_request time
+    pre_request = true;    // atoi(argv[2]);
+
     char *hello = "Hello from client";
     char buffer[30] = {0};
 
@@ -926,7 +970,63 @@ int main(int argc, char **argv)
 
     signal(SIGPIPE, sigpipe_handler);
     long time_taken, total_time = 0;
+
+    // Start the helper thread
+    std::thread helperThread(helperThreadFunction, client_fd1, hello, buffer, PORT);
+
     // End of pre-request code
+
+    // Copying arguments
+
+    // Calculate the number of arguments to copy
+    // int numArgs = argc - 2;
+    // // Dynamically allocate memory for the arguments
+    // char **arguments = (char **)malloc(numArgs * sizeof(char *));
+    // if (arguments == NULL)
+    // {
+    //     fprintf(stderr, "Memory allocation failed\n");
+    //     return 1;
+    // }
+
+    // Copy arguments from argv[2] to arguments[]
+    // for (int i = 0; i < numArgs; i++)
+    // {
+    //     // Dynamically allocate memory for each argument
+    //     // For the first one, keep its place
+    //     if (i == 0)
+    //     {
+    //         arguments[0] = (char *)malloc(strlen(argv[0]) + 1);
+    //     }
+    //     else
+    //     {
+    //         arguments[i] = (char *)malloc(strlen(argv[i + 2]) + 1);
+    //     }
+
+    //     if (arguments[i] == NULL)
+    //     {
+    //         fprintf(stderr, "Memory allocation failed\n");
+
+    //         // Free memory allocated so far
+    //         for (int j = 0; j < i; j++)
+    //         {
+    //             free(arguments[j]);
+    //         }
+    //         free(arguments);
+    //         return 1;
+    //     }
+
+    //     // Copy argument
+    //     if (i == 0)
+    //     {
+    //         strcpy(arguments[0], argv[0]);
+    //     }
+    //     else
+    //     {
+    //         strcpy(arguments[i], argv[i + 2]);
+    //     }
+    // }
+
+    // Now, arguments[] contains the copies of argv[2] to argv[argc-1]
 
     std::string dataset_file_name;
     IndexServerCommandLineArgs *index_server_command_line_args = ParseIndexServerCommandLine(argc,
