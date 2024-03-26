@@ -37,4 +37,4 @@ done
 
 cd /users/cseas002/HDSearch-Multinode/
 bash hdsearch-multinode.sh build_install
-# nohup python3 run_experiment.py > ../exponential_run.txt EXPONENTIAL_RUN &
+# nohup python3 run_experiment.py > ../no_pre.txt NO_PRE &

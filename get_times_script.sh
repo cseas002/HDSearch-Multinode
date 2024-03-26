@@ -5,12 +5,17 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+if [ -z "$2" ]; then
+    echo "Please provide the output file name ONLY THE NAME, IT WILL BE SAVED UNDER HOME DIRECTORY (~/)"
+    exit 1
+fi
+
 if [ ! -d ~/data/$1 ]; then
     echo "Directory ~/data/$1 does not exist."
     exit 1
 fi
 
-output_file=~/output.txt
+output_file=~/$2
 
 rm $output_file
 
@@ -78,8 +83,6 @@ done
 
 # Calculate averages for each 'm'
 printf "\nResults:\n\n" >> "$output_file"
-
-echo ${percentiles[1000]}
 
 for qps_value in "${!averages[@]}"; do
     average=$(calculate_average ${averages[$qps_value]})
