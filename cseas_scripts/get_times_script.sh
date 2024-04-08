@@ -17,15 +17,16 @@ fi
 
 output_file=~/$2
 
-rm $output_file
+echo "" > $output_file
 
 mkdir -p ~/data2/
 cp -r ~/data/$1 ~/data2/
 cd ~/data2/$1
 
-# Array to store the average and 99th percentile values for each m
+# Array to store the average, 99th percentile, and maximum percentile values for each m
 declare -A averages
 declare -A percentiles
+declare -A percentile_max
 
 # Function to calculate average
 calculate_average() {
@@ -49,6 +50,17 @@ calculate_percentile_average() {
     echo "scale=2; $sum / $count" | bc
 }
 
+# Function to calculate maximum percentile
+calculate_percentile_max() {
+    local max=-1
+    for value in "$@"; do
+        if (( $(echo "$value > $max" | bc -l) )); then
+            max=$value
+        fi
+    done
+    echo "$max"
+}
+
 # Loop through each folder
 for folder in *; do
     # Extract the 'm' value from folder name
@@ -63,7 +75,6 @@ for folder in *; do
     # Extract average and 99th percentile values
     average=$(echo "$output" | head -n 1 | awk '{print $4}')
     percentile_99=$(echo "$output" | tail -n 1 | awk '{print $(NF-2)}')
-
 
     # Store values in arrays indexed by 'm'
     if [ -z "${averages[$qps_value]}" ]; then
@@ -87,8 +98,10 @@ printf "\nResults:\n\n" >> "$output_file"
 for qps_value in "${!averages[@]}"; do
     average=$(calculate_average ${averages[$qps_value]})
     percentile_average=$(calculate_percentile_average ${percentiles[$qps_value]})
+    percentile_max=$(calculate_percentile_max ${percentiles[$qps_value]})
     echo "Average $qps_value: $average" >> "$output_file"
     echo "99th Percentile tail latency $qps_value: $percentile_average" >> "$output_file"
+    echo "Maximum 99th Percentile tail latency $qps_value: $percentile_max" >> "$output_file"
     echo "" >> "$output_file"
 done
 

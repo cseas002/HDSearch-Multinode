@@ -113,18 +113,39 @@ std::atomic<bool> sendRequestFlag(false);
 // Function to be executed by the helper thread
 void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
 {
-    while (true)
+    if (send_request_time >= 0) // If it's negative, it will not send a pre-request
     {
-        // Wait until the flag is set to true
-        while (!sendRequestFlag.load(std::memory_order_acquire))
+        printf("Pre request sending enabled\n");
+        while (true)
         {
+            // Wait until the flag is set to true
+            while (!sendRequestFlag.load(std::memory_order_acquire))
+            {
+            }
+            if (send_request_time > 0)
+            {
+                struct timeval start_time, end_time;
+                gettimeofday(&end_time, NULL); // Assign the end_time a low value initially
+                gettimeofday(&start_time, NULL);
+
+                // Instead of sleep(send_request_time), I actively read the current timestamp and check whether the <send_request_time> us have passed
+                // Also, I need to check that while waiting, I still want to send the pre-request
+                while (end_time.tv_usec - start_time.tv_usec < send_request_time && sendRequestFlag.load(std::memory_order_acquire))
+                {
+                    gettimeofday(&end_time, NULL);
+                }
+            }
+
+            if (sendRequestFlag.load(std::memory_order_acquire))
+            {
+                // Once the send_request_time us have passed, send the request
+                printf("Pre-request sent\n");
+                send_request(false, client_fd1, hello, buffer, port);
+            }
+
+            // Reset the flag
+            sendRequestFlag.store(false, std::memory_order_release);
         }
-
-        // Once the flag is set, send the request
-        send_request(false, client_fd1, hello, buffer, port);
-
-        // Reset the flag
-        sendRequestFlag.store(false, std::memory_order_release);
     }
 }
 
@@ -627,8 +648,9 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     char buffer[30] = {0};
     // SEND PRE-REQUEST HERE
 
-    if (pre_request && send_request_time == 0)
+    if (pre_request)
     {
+        printf("Sending pre-request\n");
         sendRequestFlag.store(true, std::memory_order_release);
         // send_request(false, client_fd1, hello, buffer, 8080);
         // printf("Pre-request sent\n");
@@ -730,13 +752,6 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
 
     start_time = GetTimeInMicro();
 
-    if (pre_request && send_request_time == 1)
-    {
-        sendRequestFlag.store(true, std::memory_order_release);
-        // send_request(false, client_fd1, hello, buffer, 8080);
-        // printf("Pre-request sent\n");
-        printf("Short time taken: %ld\n", GetTimeInMicro() - beginning_time);
-    }
     for (unsigned int i = 0; i < number_of_bucket_servers; i++)
     {
         int bucket_server_id = i;
@@ -779,6 +794,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     e1 = GetTimeInMicro() - s1;
     response_count_down_map[unique_request_id_value].index_reply->set_index_time(e1);
     map_fine_mutex[unique_request_id_value]->unlock();
+    sendRequestFlag.store(false, std::memory_order_release);
 }
 
 /* The request processing thread runs this
@@ -934,8 +950,8 @@ int main(int argc, char **argv)
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
 
-    send_request_time = 1; // atoi(argv[1]); // I added an argument that it's the send_request time
-    pre_request = true;    // atoi(argv[2]);
+    send_request_time = 150;
+    pre_request = true; // atoi(argv[2]);
 
     char *hello = "Hello from client";
     char buffer[30] = {0};
