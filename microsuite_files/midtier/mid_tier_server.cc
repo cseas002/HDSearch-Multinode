@@ -35,6 +35,7 @@
 
 int send_request_time;
 bool pre_request = true;
+int client_fd1;
 
 // Signal handler for SIGPIPE
 void sigpipe_handler(int signo)
@@ -179,7 +180,6 @@ using grpc::ClientContext;
 using grpc::CompletionQueue;
 using grpc::Status;
 
-int client_fd1;
 
 // Class declarations.
 class ServerImpl;
@@ -644,6 +644,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
                     uint64_t unique_request_id_value,
                     int tid)
 {
+    // Pre request code
     char *hello = "Hello from client";
     char buffer[30] = {0};
     // SEND PRE-REQUEST HERE
@@ -655,6 +656,8 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
         // send_request(false, client_fd1, hello, buffer, 8080);
         // printf("Pre-request sent\n");
     }
+
+    // End of pre request code
 
     uint64_t beginning_time = GetTimeInMicro();
     uint64_t s1 = 0, e1 = 0;
@@ -794,6 +797,8 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     e1 = GetTimeInMicro() - s1;
     response_count_down_map[unique_request_id_value].index_reply->set_index_time(e1);
     map_fine_mutex[unique_request_id_value]->unlock();
+
+    // Don't send pre request after here
     sendRequestFlag.store(false, std::memory_order_release);
 }
 
@@ -950,7 +955,7 @@ int main(int argc, char **argv)
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
 
-    send_request_time = 150;
+    send_request_time = 50;
     pre_request = true; // atoi(argv[2]);
 
     char *hello = "Hello from client";

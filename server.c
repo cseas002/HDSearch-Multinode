@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <asm-generic/socket.h>
 
 #define PORT 8080
 
@@ -47,6 +48,8 @@ int main(int argc, char const *argv[])
         perror("listen");
         exit(EXIT_FAILURE);
     }
+
+    printf("Server listening on port %d", PORT);
 
     while (1)
     {

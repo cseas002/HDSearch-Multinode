@@ -9,7 +9,7 @@ do
 sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_HELPER_THREAD4 &
+nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_SMT_DIS_NO_TASKSET2 &
 
 # NOW, YOU MUST WAIT
 wait 
@@ -23,7 +23,7 @@ do
 sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-nohup python3 run_experiment.py > ../pre2.txt WITH_PRE_0US_HELPER_THREAD4 &
+nohup python3 run_experiment.py > ../pre2.txt WITH_PRE_0US_SMT_DIS_NO_TASKSET2 &
 
 wait 
 
@@ -36,7 +36,7 @@ do
 sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
 done
 
-nohup python3 run_experiment.py > ../50pre2.txt WITH_PRE_50US_HELPER_THREAD4 &
+nohup python3 run_experiment.py > ../50pre2.txt WITH_PRE_50US_SMT_DIS_NO_TASKSET2 &
 
 wait 
 
@@ -49,7 +49,7 @@ do
 sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
 done
 
-nohup python3 run_experiment.py > ../100pre.txt WITH_PRE_100US_HELPER_THREAD4 &
+nohup python3 run_experiment.py > ../100pre.txt WITH_PRE_100US_SMT_DIS_NO_TASKSET2 &
 
 wait 
 # Run with pre-request 150 us after
@@ -61,6 +61,12 @@ do
 sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
 done
 
-nohup python3 run_experiment.py > ../1502pre.txt WITH_PRE_150US_HELPER_THREAD4 &
+nohup python3 run_experiment.py > ../1502pre.txt WITH_PRE_150US_SMT_DIS_NO_TASKSET2 &
 
 wait
+
+cd cseas_scripts
+for name in WITHOUT_PRE_SMT_DIS_NO_TASKSET WITH_PRE_0US_SMT_DIS_NO_TASKSET WITH_PRE_50US_SMT_DIS_NO_TASKSET WITH_PRE_100US_SMT_DIS_NO_TASKSET WITH_PRE_150US_SMT_DIS_NO_TASKSET
+do
+    bash get_times_script.sh $name $name.txt
+done
