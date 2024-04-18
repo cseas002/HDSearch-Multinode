@@ -1,22 +1,24 @@
 #!/bin/bash
 
 # Run without pre-request
-sed -i 's/send_request_time = .*/send_request_time = -1;/' ./microsuite_files/midtier/mid_tier_server.cc
+# sed -i 's/send_request_time = .*/send_request_time = -1;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
-for node in node1 node2 
-do
-sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
-done
+# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+# for node in node1 node2 
+# do
+# sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+# done
 
-nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_SMT_DIS_NO_TASKSET2 &
+# nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_SMT_DIS_NO_TASKSET2 &
 
 # NOW, YOU MUST WAIT
-wait 
+# wait 
 
 # # Run with pre-request immediately
 sed -i 's/send_request_time = .*/send_request_time = 0;/' ./microsuite_files/midtier/mid_tier_server.cc
 
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
 sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
 for node in node1 node2 
 do
@@ -30,6 +32,7 @@ wait
 # Run with pre-request 50 us after
 sed -i 's/send_request_time = .*/send_request_time = 50;/' ./microsuite_files/midtier/mid_tier_server.cc
 
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
 sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
 for node in node1 node2 
 do
@@ -55,6 +58,7 @@ wait
 # Run with pre-request 150 us after
 sed -i 's/send_request_time = .*/send_request_time = 150;/' ./microsuite_files/midtier/mid_tier_server.cc
 
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
 sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
 for node in node1 node2 
 do
