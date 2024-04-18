@@ -36,7 +36,7 @@
   - run_socwatch  
   tasks:  
   - name: Run remote socwatch    
-    command: sudo /opt/intel/oneapi/vtune/2024.0/socwatch/x64/socwatch -s 60 -t {{ MONITOR_TIME }} -f cpu-cstate -m -r int -o {{ OUTPUT_FILE }}    
+    command: sudo /opt/intel/oneapi/vtune/2024.1/socwatch/x64/socwatch -s 60 -t {{ MONITOR_TIME }} -f cpu-cstate -m -r int -o {{ OUTPUT_FILE }}    
     async: 10000     
     poll: 0 
  
