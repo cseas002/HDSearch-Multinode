@@ -67,6 +67,7 @@ int send_request(bool read_message, int client_fd, char *hello, char *buffer, in
             perror("Error reading from port");
             return -1;
         }
+        printf("Read reply: \n");
     }
 
     // Measure the time after sending to port
@@ -141,7 +142,7 @@ void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
             {
                 // Once the send_request_time us have passed, send the request
                 printf("Pre-request sent\n");
-                send_request(false, client_fd1, hello, buffer, port);
+                send_request(true, client_fd1, hello, buffer, port); // Changed this to true so I can see the message
             }
 
             // Reset the flag
@@ -179,7 +180,6 @@ using grpc::ClientAsyncResponseReader;
 using grpc::ClientContext;
 using grpc::CompletionQueue;
 using grpc::Status;
-
 
 // Class declarations.
 class ServerImpl;
@@ -955,7 +955,7 @@ int main(int argc, char **argv)
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
 
-    send_request_time = 50;
+    send_request_time = 0;
     pre_request = true; // atoi(argv[2]);
 
     char *hello = "Hello from client";
