@@ -17,6 +17,7 @@ done
 # Then, run:
 for node in node2 node1 node0
 do
+    ssh $node "sudo apt-get update; sudo apt-get install -y linux-tools-common linux-tools-generic; sudo apt-get install -y linux-tools-5.4.0-164-generic; sudo apt-get install -y linux-cloud-tools-5.4.0-164-generic"
     ssh $node "sudo cpupower frequency-set -g userspace"
     ssh $node "sudo cpupower frequency-set -f 2200MHz"
 done
