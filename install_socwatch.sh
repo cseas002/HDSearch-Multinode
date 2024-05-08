@@ -10,7 +10,7 @@ echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt
 sudo apt-get update;
 sudo apt install -y intel-basekit;
 sudo apt install -y linux-tools-common linux-tools-$(uname -r);
-make'
+make -j `nproc`'
 # I added this to make it tickless
 # ssh -A $node "sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\"/\1 nohz=on\"/' /etc/default/grub;
 # ssh -A $node "sudo sed -i 's/^\(GRUB_CMDLINE_LINUX_DEFAULT=\".*\)\"/\1 nohz_full=1-10\"/' /etc/default/grub;
