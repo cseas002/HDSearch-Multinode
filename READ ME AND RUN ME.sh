@@ -1,6 +1,6 @@
 # FIRSTLY, SEE fixed_cpu.sh UNDER cseas_scripts TO SET UP FIXED FREQUENCY
 
-curl 'https://uc3abce616e61a729916e3a2c7fd.dl.dropboxusercontent.com/cd/0/get/CR7gZwe5AL8XIhtamXYy8kiNXIxr1jGQzyxmHrUd92CS6GQLDOf7fM4zqrVEDTeHdEKw7NCiWSYb74AoQaaTNUJIpu6iLXlfW3IV0F7caHTqHovNfkqZxQlWvP6v-cBs6Gzc4idOLmRxfugqovVdAEKnOh9kfN6OEu2Vy_Ai48_6BA/file?_download_id=404755698059312149262222861511857935325888221549377349937416428&_notify_domain=www.dropbox.com&dl=1' \
+curl 'https://ucc6a847146a03c8f8f0c1da78f7.dl.dropboxusercontent.com/cd/0/get/CSgQuTdxL6cv_C47zdC16SDPMNwvw68UiBrxD_1GUjegoZGt2AgXlnMHfe4Cqbx85DuR0wZpImdVoSjeS5DKhlCmbrBCFIL1fhZSMSLAami-HjKd0IfPqe89ZLSS534-pPv9M52QWdlF9ihjG5mOFos1LICATQWhfDq05jTIXwzszQ/file?_download_id=7646227232302012569994970768378581956273485335016636917487530687&_notify_domain=www.dropbox.com&dl=1' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'priority: u=0, i' \

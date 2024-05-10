@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for node in node2 node1 
+for node in node2 
 do
 scp grow-rootfs.sh $node:~/
 ssh -A $node 'chmod +x grow-rootfs.sh;

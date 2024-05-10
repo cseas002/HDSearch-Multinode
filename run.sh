@@ -11,12 +11,12 @@ sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
 mkdir -p ~/results
-mkdir -p ~/results/WITHOUT_PRE
+mkdir -p ~/results/WITHOUT_PRE2
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/WITHOUT_PRE'
+ssh node2 'mkdir -p ~/results/WITHOUT_PRE2'
 
-nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE &
+nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE2 &
 
 # # Wait for 1 minute
 # sleep 60
@@ -34,16 +34,16 @@ nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE &
 # ssh node2 'sudo tshark -r ~/results/WITHOUT_PRE/wireshark.pcap -Y "ip.src==10.10.1.2" -T fields -e frame.number -e frame.time -e ip.src -e ip.dst -e frame.len > ~/results/WITHOUT_PRE/wireshark.txt'
 
 
-ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/WITHOUT_PRE/wireshark.txt' &
+# ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/WITHOUT_PRE/wireshark.txt' &
 
 # NOW, YOU MUST WAIT
 wait 
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/WITHOUT_PRE/wireshark.txt ~/results/WITHOUT_PRE/
+scp node2:~/results/WITHOUT_PRE2/wireshark.txt ~/results/WITHOUT_PRE2/
 
-scp node2:~/turbo* ~/results/WITHOUT_PRE/
+scp node2:~/turbo* ~/results/WITHOUT_PRE2/
 
 
 
@@ -58,12 +58,12 @@ do
 sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-mkdir -p ~/results/0us_PRE
+mkdir -p ~/results/0us_PRE2
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/0us_PRE'
+ssh node2 'mkdir -p ~/results/0us_PRE2'
 
-nohup python3 run_experiment.py > ../pre2.txt 0us_PRE &
+nohup python3 run_experiment.py > ../pre2.txt 0us_PRE2 &
 
 
 # # Wait for 1 minute
@@ -84,15 +84,15 @@ nohup python3 run_experiment.py > ../pre2.txt 0us_PRE &
 # # Transfer the Wireshark text file to node0
 # scp node2:~/results/0us_PRE/wireshark.txt ~/results/0us_PRE/
 
-ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/0us_PRE/wireshark.txt' &
+# ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/0us_PRE/wireshark.txt' &
 
 wait
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/0us_PRE/wireshark.txt ~/results/0us_PRE/
+scp node2:~/results/0us_PRE2/wireshark.txt ~/results/0us_PRE2/
 
-scp node2:~/turbo* ~/results/0us_PRE/
+scp node2:~/turbo* ~/results/0us_PRE2/
 # # Run with pre-request 50 us after
 # sed -i 's/send_request_time = .*/send_request_time = 50;/' ./microsuite_files/midtier/mid_tier_server.cc
 
@@ -142,8 +142,8 @@ scp node2:~/turbo* ~/results/0us_PRE/
 # mkdir -p ~/results/WITH_PRE_150US
 # scp node2:~/turbo* ~/results/WITH_PRE_150US/
 
-# cd cseas_scripts
-for name in 0us_PRE WITHOUT_PRE
+cd cseas_scripts
+for name in 0us_PRE2 WITHOUT_PRE2
 do
     bash get_times_script.sh $name $name.txt
 done

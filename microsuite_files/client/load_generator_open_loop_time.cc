@@ -470,6 +470,7 @@ int main(int argc, char **argv)
             }
             // CHANGE
             next_time = distribution(generator) + curr_time; // curr_time + center;
+            printf("Next Poisson time = %lf\n", next_time);
             index = rand() % queries_size;
 
             query.SetPoint(0, queries.GetPointAtIndex(index));
@@ -492,7 +493,7 @@ int main(int argc, char **argv)
 
     printf("Experiment duration: %lu\n", time_duration);
 
-    exponential = false;
+    exponential = true;
     center = 1000000.0 / (double)(qps);
     // Declare the poisson distribution
     std::default_random_engine generator_run;
@@ -513,7 +514,7 @@ int main(int argc, char **argv)
     // The next time is the current + center
     index = rand() % queries_size;
     //!!!!!!!Actual Run !!!!!!!
-    printf("Next time = %lf\n", next_time);
+    printf("Next Exponential time = %lf\n", next_time);
 
     // OLD IMPLEMENTATION
 

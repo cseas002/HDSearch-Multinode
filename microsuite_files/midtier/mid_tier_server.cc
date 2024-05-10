@@ -33,7 +33,7 @@
 #define PORT 8080
 #define PORT2 8081
 
-int send_request_time;
+int send_request_time = -1;
 bool pre_request = true;
 int client_fd1;
 
@@ -649,7 +649,7 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     char buffer[30] = {0};
     // SEND PRE-REQUEST HERE
 
-    if (pre_request)
+    if (send_request_time >= 0)
     {
         printf("Sending pre-request\n");
         sendRequestFlag.store(true, std::memory_order_release);
@@ -954,8 +954,6 @@ int main(int argc, char **argv)
     int status, valread, client_fd2;
     struct sockaddr_in serv_addr1, serv_addr2;
     bool poisson, fixed, exponential, pre_request;
-
-    send_request_time = 0;
     pre_request = true; // atoi(argv[2]);
 
     char *hello = "Hello from client";
