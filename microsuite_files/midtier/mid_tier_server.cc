@@ -33,7 +33,7 @@
 #define PORT 8080
 #define PORT2 8081
 
-int send_request_time = -1;
+int send_request_time = 0;
 bool pre_request = true;
 int client_fd1;
 

@@ -11,12 +11,12 @@ sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
 mkdir -p ~/results
-mkdir -p ~/results/WITHOUT_PRE2
+mkdir -p ~/results/WITHOUT_PRE3
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/WITHOUT_PRE2'
+ssh node2 'mkdir -p ~/results/WITHOUT_PRE3'
 
-nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE2 &
+nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE3 &
 
 # # Wait for 1 minute
 # sleep 60
@@ -41,9 +41,9 @@ wait
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/WITHOUT_PRE2/wireshark.txt ~/results/WITHOUT_PRE2/
+scp node2:~/results/WITHOUT_PRE3/wireshark.txt ~/results/WITHOUT_PRE3/
 
-scp node2:~/turbo* ~/results/WITHOUT_PRE2/
+scp node2:~/turbo* ~/results/WITHOUT_PRE3/
 
 
 
@@ -58,12 +58,12 @@ do
 sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
-mkdir -p ~/results/0us_PRE2
+mkdir -p ~/results/0us_PRE3
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/0us_PRE2'
+ssh node2 'mkdir -p ~/results/0us_PRE3'
 
-nohup python3 run_experiment.py > ../pre2.txt 0us_PRE2 &
+nohup python3 run_experiment.py > ../pre2.txt 0us_PRE3 &
 
 
 # # Wait for 1 minute
@@ -90,9 +90,9 @@ wait
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/0us_PRE2/wireshark.txt ~/results/0us_PRE2/
+scp node2:~/results/0us_PRE3/wireshark.txt ~/results/0us_PRE3/
 
-scp node2:~/turbo* ~/results/0us_PRE2/
+scp node2:~/turbo* ~/results/0us_PRE3/
 # # Run with pre-request 50 us after
 # sed -i 's/send_request_time = .*/send_request_time = 50;/' ./microsuite_files/midtier/mid_tier_server.cc
 
@@ -143,7 +143,7 @@ scp node2:~/turbo* ~/results/0us_PRE2/
 # scp node2:~/turbo* ~/results/WITH_PRE_150US/
 
 cd cseas_scripts
-for name in 0us_PRE2 WITHOUT_PRE2
+for name in 0us_PRE3 WITHOUT_PRE3
 do
     bash get_times_script.sh $name $name.txt
 done
