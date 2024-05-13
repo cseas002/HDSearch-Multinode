@@ -25,35 +25,49 @@ with open(output_file, 'w') as file:
 with open("output.txt", "r") as file:
     differences = [float(line.strip()) for line in file if line.strip()]
 
-
 # Sort the differences
 sorted_differences = sorted(differences)
 
-# Plot the sorted differences
-plt.plot(sorted_differences, marker='o', linestyle='-', label='Sorted Differences')
-
-# Generate random numbers from an exponential distribution with lambda = 100 microseconds
-num_points = len(sorted_differences)
+# Define the rate parameter λ
 lambda_microseconds = 100 / 1000000
-exponential_data = np.random.exponential(scale=1/lambda_microseconds, size=num_points)
 
-# Sort the randomly generated points
-sorted_exponential_data = np.sort(exponential_data)
+# Define a range of x values for the exponential distribution
+x_values = np.linspace(0, max(sorted_differences), 1000)
 
-# Plot the sorted exponential distribution
-plt.plot(sorted_exponential_data, marker='s', linestyle='-', color='orange', label='Sorted Exponential Distribution (λ=100 μs)')
+# Calculate the corresponding y values using the exponential PDF formula
+exponential_pdf = lambda_microseconds * np.exp(-lambda_microseconds * x_values)
 
-plt.title('Comparison of Sorted Differences and Sorted Exponential Distribution')
+# Plot the sorted intervals and the exponential distribution
+plt.plot(sorted_differences, marker='o', linestyle='-', label='Intervals')
+plt.plot(x_values, exponential_pdf, linestyle='-', color='orange', label='Exponential Distribution (λ=100 μs)')
+
+plt.title('Comparison of Intervals and Exponential Distribution')
 plt.xlabel('Index')
 plt.ylabel('Value')
 plt.grid(True)
 plt.legend()
 
-# Save the plot as output.png
-plt.savefig('output.png')
+# Save the sorted intervals and exponential distribution plot as sorted_graphs.png
+plt.savefig('sorted_graphs.png')
 
-# Display the plot
-plt.show()
+# Clear the plot
+plt.clf()
 
-# Display the plot
+# Plot the probability density function (PDF) of the intervals and exponential distribution
+plt.hist(sorted_differences, bins=30, density=True, alpha=0.5, color='blue', label='Intervals PDF', rwidth=0.8)
+plt.plot(x_values, exponential_pdf, linestyle='-', color='orange', label='Exponential Distribution PDF')
+
+plt.title('Probability Density Function (PDF)')
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.grid(True)
+plt.legend()
+
+# Adjust layout to prevent axis title from being cut off
+plt.tight_layout()
+
+# Save the PDF plot as pdf_output.png
+plt.savefig('pdf_output.png')
+
+# Display the PDF plot
 plt.show()

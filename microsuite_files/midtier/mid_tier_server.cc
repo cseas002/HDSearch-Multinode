@@ -20,6 +20,7 @@
 
 // Pre-request code
 
+#include <vector>
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <string.h>
@@ -33,9 +34,17 @@
 #define PORT 8080
 #define PORT2 8081
 
+// Global variables
 int send_request_time = 0;
 bool pre_request = true;
 int client_fd1;
+
+int previous_average_time = 0;
+int process_request_count = 0;
+bool increasing = false;
+int step = 100;
+bool adaptive = true;
+std::vector<long> times_taken;
 
 // Signal handler for SIGPIPE
 void sigpipe_handler(int signo)
@@ -780,7 +789,64 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
     response_count_down_map[unique_request_id_value].index_reply->set_get_bucket_responses_time(GetTimeInMicro());
     // map_fine_mutex[unique_request_id_value]->unlock();
 
-    printf("Full time taken: %ld\n", GetTimeInMicro() - beginning_time);
+    long total_time = GetTimeInMicro() - beginning_time;
+
+    printf("Full time taken: %ld\n", total_time);
+    printf("Pre-Query Request Interval: %d\n", send_request_time);
+    // Increment process request count and store time taken
+    ++process_request_count;
+    times_taken.push_back(total_time);
+
+    // Check if 1000 iterations have passed
+    if (process_request_count % 1000 == 0 && send_request_time >= 0 && adaptive)
+    {
+        // Calculate average time
+        uint64_t total_time = 0;
+        for (const auto &time : times_taken)
+        {
+            total_time += time;
+        }
+        uint64_t average_time = total_time / times_taken.size();
+
+        // Adjust send_request_time parameter based on comparison with previous average
+        // If the pre-request interval increased previously, then increase it now (initially it will increase)
+        if (increasing)
+        {
+            // If the new average is less, then increase the send_request_time
+            if (average_time < previous_average_time)
+            {
+                send_request_time += step;
+            }
+            else // Decrease the send request time
+            {
+                send_request_time -= step;
+                increasing = false;
+            }
+        }
+        else
+        {
+            // If the new average is less, then decrease the send_request_time
+            if (average_time < previous_average_time)
+            {
+                send_request_time -= step;
+            }
+            else // Increase the send request time
+            {
+                send_request_time += step;
+                increasing = true;
+            }
+        }
+        // Change the step (the rate which will increase or decrease the pre-query request interval)
+        if (step > 5)
+        {
+            step /= 2;
+        }
+        previous_average_time = average_time;
+
+        // Reset times_taken array for next 1000 iterations
+        times_taken.clear();
+    }
+
     for (int i = 0; i < number_of_bucket_servers; i++)
     {
         int index = (tid * number_of_bucket_servers) + i;
