@@ -422,7 +422,7 @@ int main(int argc, char **argv)
     int index = rand() % queries_size;
 
     MultiplePoints query(1, queries.GetPointAtIndex(index));
-    double center = 1000000.0 / (double)(1000);
+    double center = 1000000.0 / (double)(100); // (100 QPS = 10ms interval)
     double curr_time = (double)GetTimeInMicro();
     // warmup for 15 second and 1000 qps
     double exit_time = curr_time + (double)(15 * 1000000);

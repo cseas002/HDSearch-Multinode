@@ -154,7 +154,7 @@ services:
                 echo 'profilers launched'
                 cd /MicroSuite/src/HDSearch/load_generator
                 mkdir ./results
-                taskset -c 1 ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 500 midtier:50054 dummy1 dummy2 dummy3"
+                taskset -c 1 ./load_generator_open_loop /home/image_feature_vectors.dat ./results/ 1 120 10 midtier:50054 dummy1 dummy2 dummy3"
 #networks:
 #  outside:
 #    external:

@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Run without pre-request
-# sed -i 's/send_request_time = .*/send_request_time = -1;/' ./microsuite_files/midtier/mid_tier_server.cc
+# Run with adaptive pre
+sed -i 's/send_request_time = .*/send_request_time = 0;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = true;/' ./microsuite_files/midtier/mid_tier_server.cc
 
 sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
 sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
@@ -11,139 +12,143 @@ sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
 mkdir -p ~/results
-mkdir -p ~/results/ADAPTIVE
+mkdir -p ~/results/ADAPTIVE_FIXED
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/ADAPTIVE'
+ssh node2 'mkdir -p ~/results/ADAPTIVE_FIXED'
 
-nohup python3 run_experiment.py > ../no_pre.txt ADAPTIVE &
+nohup python3 run_experiment.py > ../no_pre.txt ADAPTIVE_FIXED &
 
-# # Wait for 1 minute
-# sleep 60
-
-# # Start Wireshark capture on node2, filtering traffic from node1
-# ssh node2 'tshark -i ens1f0 -w ~/results/WITHOUT_PRE/wireshark.pcap host 10.10.1.2' &
-
-# # Wait for 10 minutes (Wireshark will be capturing during this time)
-# sleep 600
-
-# # Stop Wireshark capture
-# ssh node2 'sudo pkill tshark'
-
-# # Convert the captured pcap file to a readable format
-# ssh node2 'sudo tshark -r ~/results/WITHOUT_PRE/wireshark.pcap -Y "ip.src==10.10.1.2" -T fields -e frame.number -e frame.time -e ip.src -e ip.dst -e frame.len > ~/results/WITHOUT_PRE/wireshark.txt'
-
-
-# ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/WITHOUT_PRE/wireshark.txt' &
 
 # NOW, YOU MUST WAIT
 wait 
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/ADAPTIVE/wireshark.txt ~/results/ADAPTIVE/
+scp node2:~/results/ADAPTIVE_FIXED/wireshark.txt ~/results/ADAPTIVE_FIXED/
 
-scp node2:~/turbo* ~/results/ADAPTIVE/
-
-
+scp node2:~/turbo* ~/results/ADAPTIVE_FIXED/
 
 
-# # Run with pre-request immediately
-# sed -i 's/send_request_time = .*/send_request_time = 0;/' ./microsuite_files/midtier/mid_tier_server.cc
+# Run without pre-request
+sed -i 's/send_request_time = .*/send_request_time = -1;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = false;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
-# for node in node1 node2 
-# do
-# sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
-# done
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+for node in node1 node2 
+do
+sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+done
 
-# mkdir -p ~/results/0us_PRE3
+mkdir -p ~/results
+mkdir -p ~/results/WITHOUT_PRE_FIXED
 
-# # Check if the directory exists, if not, create it
-# ssh node2 'mkdir -p ~/results/0us_PRE3'
+# Check if the directory exists, if not, create it
+ssh node2 'mkdir -p ~/results/WITHOUT_PRE_FIXED'
 
-# nohup python3 run_experiment.py > ../pre2.txt 0us_PRE3 &
+nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_FIXED &
 
 
-# # # Wait for 1 minute
-# # sleep 60
+# NOW, YOU MUST WAIT
+wait 
+scp node2:~/turbo* ~/results/WITHOUT_PRE_FIXED/
 
-# # # Start Wireshark capture on node2, filtering traffic from node1
-# # ssh node2 "tshark -i ens1f0 -w ~/results/0us_PRE/wireshark.pcap host 10.10.1.2" &
 
-# # # Wait for 10 minutes (Wireshark will be capturing during this time)
-# # sleep 600
+# Run with 0us pre-request
+sed -i 's/send_request_time = .*/send_request_time = 0;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = false;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-# # # Stop Wireshark capture
-# # ssh node2 'sudo pkill tshark'
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+for node in node1 node2 
+do
+sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+done
 
-# # # Convert the captured pcap file to a readable format
-# # ssh node2 'sudo tshark -r ~/results/0us_PRE/wireshark.pcap -Y "ip.src==10.10.1.2" -T fields -e frame.number -e frame.time -e ip.src -e ip.dst -e frame.len > ~/results/0us_PRE/wireshark.txt'
+mkdir -p ~/results
+mkdir -p ~/results/0US_PRE_FIXED
 
-# # # Transfer the Wireshark text file to node0
-# # scp node2:~/results/0us_PRE/wireshark.txt ~/results/0us_PRE/
+# Check if the directory exists, if not, create it
+ssh node2 'mkdir -p ~/results/0US_PRE_FIXED'
 
-# # ssh node2 'sudo tshark -f "dst port 50050 or dst port 8080" -i any >> ~/results/0us_PRE/wireshark.txt' &
+nohup python3 run_experiment.py > ../no_pre.txt 0US_PRE_FIXED &
 
-# wait
 
-# ssh node2 "sudo pkill tshark"
-# # Transfer the Wireshark text file to your local machine
-# scp node2:~/results/0us_PRE3/wireshark.txt ~/results/0us_PRE3/
+# NOW, YOU MUST WAIT
+wait 
+scp node2:~/turbo* ~/results/0US_PRE_FIXED/
 
-# scp node2:~/turbo* ~/results/0us_PRE3/
-# # Run with pre-request 50 us after
-# sed -i 's/send_request_time = .*/send_request_time = 50;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
-# for node in node1 node2 
-# do
-# sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
-# done
+# Run with 50us pre-request
+sed -i 's/send_request_time = .*/send_request_time = 50;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = false;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-# nohup python3 run_experiment.py > ../50pre2.txt WITH_PRE_50US &
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+for node in node1 node2 
+do
+sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+done
 
-# wait 
+mkdir -p ~/results
+mkdir -p ~/results/50US_PRE_FIXED
 
-# mkdir -p ~/results/WITH_PRE_50US
-# scp node2:~/turbo* ~/results/WITH_PRE_50US/
+# Check if the directory exists, if not, create it
+ssh node2 'mkdir -p ~/results/50US_PRE_FIXED'
 
-# # Run with pre-request 100 us after
-# sed -i 's/send_request_time = .*/send_request_time = 100;/' ./microsuite_files/midtier/mid_tier_server.cc
+nohup python3 run_experiment.py > ../no_pre.txt 50US_PRE_FIXED &
 
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
-# for node in node1 node2 
-# do
-# sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
-# done
+wait
+scp node2:~/turbo* ~/results/50US_PRE_FIXED/
 
-# nohup python3 run_experiment.py > ../100pre.txt WITH_PRE_100US &
+# Run with 100us pre-request
+sed -i 's/send_request_time = .*/send_request_time = 100;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = false;/' ./microsuite_files/midtier/mid_tier_server.cc
 
-# wait 
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+for node in node1 node2 
+do
+sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+done
 
-# mkdir -p ~/results/WITH_PRE_100US
-# scp node2:~/turbo* ~/results/WITH_PRE_100US/
-# # Run with pre-request 150 us after
-# sed -i 's/send_request_time = .*/send_request_time = 150;/' ./microsuite_files/midtier/mid_tier_server.cc
+mkdir -p ~/results
+mkdir -p ~/results/100US_PRE_FIXED
 
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
-# sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
-# for node in node1 node2 
-# do
-# sudo scp /mydata/HDSearch/microsuite_files/midtier/* cseas002@$node:/mydata/HDSearch/microsuite_files/midtier/*
-# done
+# Check if the directory exists, if not, create it
+ssh node2 'mkdir -p ~/results/100US_PRE_FIXED'
 
-# nohup python3 run_experiment.py > ../1502pre.txt WITH_PRE_150US &
+nohup python3 run_experiment.py > ../no_pre.txt 100US_PRE_FIXED &
 
-# wait
+# NOW, YOU MUST WAIT
+wait 
+scp node2:~/turbo* ~/results/100US_PRE_FIXED/
 
-# mkdir -p ~/results/WITH_PRE_150US
-# scp node2:~/turbo* ~/results/WITH_PRE_150US/
+# Run with 150us pre-request
+sed -i 's/send_request_time = .*/send_request_time = 150;/' ./microsuite_files/midtier/mid_tier_server.cc
+sed -i 's/adaptive = .*/adaptive = false;/' ./microsuite_files/midtier/mid_tier_server.cc
+
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/client/* /mydata/HDSearch
+sudo cp /users/cseas002/HDSearch-Multinode/microsuite_files/midtier/* /mydata/HDSearch
+for node in node1 node2 
+do
+sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
+done
+
+mkdir -p ~/results
+mkdir -p ~/results/150US_PRE_FIXED
+
+# Check if the directory exists, if not, create it
+ssh node2 'mkdir -p ~/results/150US_PRE_FIXED'
+
+nohup python3 run_experiment.py > ../no_pre.txt 150US_PRE_FIXED &
+
+wait
+scp node2:~/turbo* ~/results/150US_PRE_FIXED/
 
 cd cseas_scripts
-for name in adaptive
+for name in ADAPTIVE_FIXED WITHOUT_PRE_FIXED 0US_PRE_FIXED 50US_PRE_FIXED 100US_PRE_FIXED 150US_PRE_FIXED
 do
     bash get_times_script.sh $name $name.txt
 done

@@ -35,7 +35,7 @@
 #define PORT2 8081
 
 // Global variables
-int send_request_time = 0;
+int send_request_time = 150;
 bool pre_request = true;
 int client_fd1;
 
@@ -43,7 +43,7 @@ int previous_average_time = 0;
 int process_request_count = 0;
 bool increasing = false;
 int step = 100;
-bool adaptive = true;
+bool adaptive = false;
 std::vector<long> times_taken;
 
 // Signal handler for SIGPIPE
