@@ -493,7 +493,7 @@ int main(int argc, char **argv)
 
     printf("Experiment duration: %lu\n", time_duration);
 
-    exponential = false;
+    exponential = true;
     center = 1000000.0 / (double)(qps);
     // Declare the poisson distribution
     std::default_random_engine generator_run;
