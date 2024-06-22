@@ -255,38 +255,31 @@ def run_socwatch(name):  # Georgia you had an extra parameter here named "conf"
     extravars = ['MONITOR_TIME=40', 'OUTPUT_FILE={}'.format(name)]
     run_ansible_playbook(inventory='hosts', extravars=extravars, playbook='./ansible/profiler.yml', tags='run_socwatch')
 
-
-def run_single_experiment(system_conf, root_results_dir, name_prefix, client_conf, idx, bucket, midtier):
+def run_single_experiment(system_conf,root_results_dir, name_prefix, client_conf, idx,bucket,midtier):
     name = name_prefix + client_conf.shortname()
     results_dir_name = "{}-{}".format(name, idx)
     results_dir_path = os.path.join(root_results_dir, results_dir_name)
     hdsearch_results_dir_path = os.path.join(results_dir_path, 'hdsearch')
+      
+    # cleanup any processes left by a previous run
 
-    # Cleanup any processes left by a previous run
     kill_remote()
-    kill_profiler(bucket, midtier)
+    kill_profiler(bucket,midtier)
 
     time.sleep(15)
     
-    # Start turbostat on node1 in the background
-    turbostat_log_path = os.path.join(results_dir_path, 'turbostat_output.txt')
-    turbostat_command = f'ssh node1 "nohup sudo turbostat -n 10 --show sysfs,CPU,PkgWatt --hide POLL,C1,C1E,C6,POLL% -cpu 1 -q > {turbostat_log_path} 2>&1 & echo $!"'
-    try:
-        turbostat_pid = exec_command(turbostat_command)
-        turbostat_pid = turbostat_pid[0].strip()  # Get the PID of the background process
-    except Exception as e:
-        logging.error("Error running turbostat: {}".format(e))
-        return 1
-    
-    # Run profiler
+    #run_profiler
     run_remote(client_conf)
+    profiler_output = 0
+    # COMMENTED OUT THIS LINE AND REPLACED IT WITH THE LINE ABOVE
     profiler_output = run_profiler(idx)
-
+    
     if profiler_output != 0:
         return profiler_output
-    print("Profiler output " + str(profiler_output))
+    print("Profilerrrrr output " + str(profiler_output))
     
-    # Run socwatch
+    # exit()
+    # Added function 
     run_socwatch(name)
 
     run_output = run_ansible_playbook(
@@ -296,32 +289,41 @@ def run_single_experiment(system_conf, root_results_dir, name_prefix, client_con
     
     if run_output != 0:
         return run_output
-
-    # Commented out these two lines
-    # stop_profiler(bucket, midtier)
-    # report_profiler(bucket, midtier, hdsearch_results_dir_path)
     
-    # Check socwatch status for midtier and bucket
+
+    # COMMENTED OUT THESE TWO LINES
+    stop_profiler(bucket,midtier)
+    report_profiler(bucket,midtier,hdsearch_results_dir_path)
+    
+    
+    # Calling script
+
+    # For midtier
     while True:
         active_socwatch = exec_command("./scripts/check-socwatch-status.sh node1")
-        if int(active_socwatch[0]) < 3:
+        if (int(active_socwatch[0]) < 3): # Check whether socwatch is running 
+            # (there should be 2 lines if it's not running: 
+            # bash -c ps aux | grep socwatch 
+            # grep socwatch)
             break
         time.sleep(30)
     
+    # For bucket
     while True:
         active_socwatch = exec_command("./scripts/check-socwatch-status.sh node2")
-        if int(active_socwatch[0]) < 3:
+        if (int(active_socwatch[0]) < 3):  
             break
         time.sleep(30)
+
 
     client_results_path_name = os.path.join(results_dir_path, 'hdsearch_client')
     midtier_results_path_name = os.path.join(results_dir_path, 'hdsearch_midtier')
     exec_command('sudo mkdir {}'.format(results_dir_path))
 
     # Get client logs
-    rawoutput_client = exec_command("sudo docker service logs microsuite_client --raw")
+    rawoutput_client=exec_command("sudo docker service logs microsuite_client --raw")
     # Get midtier logs
-    rawoutput_midtier = exec_command("sudo docker service logs microsuite_midtier --raw")
+    rawoutput_midtier=exec_command("sudo docker service logs microsuite_midtier --raw")
     exec_command("sudo touch {}".format(client_results_path_name))
     exec_command("sudo chmod 777 {}".format(client_results_path_name))
     exec_command("sudo touch {}".format(midtier_results_path_name))
@@ -334,15 +336,9 @@ def run_single_experiment(system_conf, root_results_dir, name_prefix, client_con
         for l in rawoutput_midtier:
             fo.write(safeStr(l)+'\n')
     
-    # Kill the turbostat process before cleanup
-    try:
-        exec_command(f'ssh node1 "sudo kill {turbostat_pid}"')
-    except Exception as e:
-        logging.error("Error killing turbostat: {}".format(e))
-    
-    # Cleanup
+    # cleanup
     kill_remote()
-    kill_profiler(bucket, midtier)
+    kill_profiler(bucket,midtier)
 
     return 0
 

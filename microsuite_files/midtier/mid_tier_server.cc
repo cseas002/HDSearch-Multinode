@@ -124,14 +124,6 @@ std::atomic<bool> sendRequestFlag(false);
 // Function to be executed by the helper thread
 void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
 {
-
-    // Set the affinity of this thread to core 1
-    cpu_set_t cpuset;
-    CPU_ZERO(&cpuset);
-    CPU_SET(1, &cpuset);
-
-    pthread_t current_thread = pthread_self();
-    pthread_setaffinity_np(current_thread, sizeof(cpu_set_t), &cpuset);
     if (send_request_time >= 0) // If it's negative, it will not send a pre-request
     {
         printf("Pre request sending enabled\n");
