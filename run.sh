@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ssh node1 "sudo apt-get update && sudo apt-get install linux-tools-common && sudo apt-get -y install linux-tools-5.4.0-164-generic"
+
 # Run with adaptive pre
 sed -i 's/send_request_usecs_wait = .*/send_request_usecs_wait = 0;/' ./microsuite_files/midtier/mid_tier_server.cc
 sed -i 's/adaptive = .*/adaptive = true;/' ./microsuite_files/midtier/mid_tier_server.cc
@@ -14,13 +16,13 @@ done
 mkdir -p ~/results
 mkdir -p ~/results/bucket
 mkdir -p ~/results/midtier
-mkdir -p ~/results/bucket/ADAPTIVE_FIXEDNBW2
-mkdir -p ~/results/midtier/ADAPTIVE_FIXEDNBW2
+mkdir -p ~/results/bucket/ADAPTIVE_FIXEDBW_CSTATES_DIS
+mkdir -p ~/results/midtier/ADAPTIVE_FIXEDBW_CSTATES_DIS
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/ADAPTIVE_FIXEDNBW2'
+ssh node2 'mkdir -p ~/results/ADAPTIVE_FIXEDBW_CSTATES_DIS'
 
-nohup python3 run_experiment.py > ../no_pre.txt ADAPTIVE_FIXEDNBW2 &
+nohup python3 run_experiment.py > ../no_pre.txt ADAPTIVE_FIXEDBW_CSTATES_DIS &
 
 
 # NOW, YOU MUST WAIT
@@ -28,10 +30,10 @@ wait
 
 ssh node2 "sudo pkill tshark"
 # Transfer the Wireshark text file to your local machine
-scp node2:~/results/ADAPTIVE_FIXEDNBW2/wireshark.txt ~/results/ADAPTIVE_FIXEDNBW2/
+scp node2:~/results/ADAPTIVE_FIXEDBW_CSTATES_DIS/wireshark.txt ~/results/ADAPTIVE_FIXEDBW_CSTATES_DIS/
 
-scp node2:~/turbo* ~/results/bucket/ADAPTIVE_FIXEDNBW2/
-scp node1:~/turbo* ~/results/midtier/ADAPTIVE_FIXEDNBW2/
+scp node2:~/turbo* ~/results/bucket/ADAPTIVE_FIXEDBW_CSTATES_DIS/
+scp node1:~/turbo* ~/results/midtier/ADAPTIVE_FIXEDBW_CSTATES_DIS/
 
 
 # Run without pre-request
@@ -46,19 +48,19 @@ sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
 mkdir -p ~/results
-mkdir -p ~/results/bucket/WITHOUT_PRE_FIXEDNBW2
-mkdir -p ~/results/midtier/WITHOUT_PRE_FIXEDNBW2
+mkdir -p ~/results/bucket/WITHOUT_PRE_FIXEDBW_CSTATES_DIS
+mkdir -p ~/results/midtier/WITHOUT_PRE_FIXEDBW_CSTATES_DIS
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/WITHOUT_PRE_FIXEDNBW2'
+ssh node2 'mkdir -p ~/results/WITHOUT_PRE_FIXEDBW_CSTATES_DIS'
 
-nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_FIXEDNBW2 &
+nohup python3 run_experiment.py > ../no_pre.txt WITHOUT_PRE_FIXEDBW_CSTATES_DIS &
 
 
 # NOW, YOU MUST WAIT
 wait 
-scp node2:~/turbo* ~/results/bucket/WITHOUT_PRE_FIXEDNBW2
-scp node1:~/turbo* ~/results/midtier/WITHOUT_PRE_FIXEDNBW2
+scp node2:~/turbo* ~/results/bucket/WITHOUT_PRE_FIXEDBW_CSTATES_DIS
+scp node1:~/turbo* ~/results/midtier/WITHOUT_PRE_FIXEDBW_CSTATES_DIS
 
 
 # Run with 0us pre-request
@@ -73,19 +75,19 @@ sudo scp -r /mydata/HDSearch cseas002@$node:/mydata/
 done
 
 mkdir -p ~/results
-mkdir -p ~/results/bucket/0US_PRE_FIXEDNBW2
-mkdir -p ~/results/midtier/0US_PRE_FIXEDNBW2
+mkdir -p ~/results/bucket/0US_PRE_FIXEDBW_CSTATES_DIS
+mkdir -p ~/results/midtier/0US_PRE_FIXEDBW_CSTATES_DIS
 
 # Check if the directory exists, if not, create it
-ssh node2 'mkdir -p ~/results/0US_PRE_FIXEDNBW2'
+ssh node2 'mkdir -p ~/results/0US_PRE_FIXEDBW_CSTATES_DIS'
 
-nohup python3 run_experiment.py > ../no_pre.txt 0US_PRE_FIXEDNBW2 &
+nohup python3 run_experiment.py > ../no_pre.txt 0US_PRE_FIXEDBW_CSTATES_DIS &
 
 
 # NOW, YOU MUST WAIT
 wait 
-scp node2:~/turbo* ~/results/bucket/0US_PRE_FIXEDNBW2
-scp node1:~/turbo* ~/results/midtier/0US_PRE_FIXEDNBW2
+scp node2:~/turbo* ~/results/bucket/0US_PRE_FIXEDBW_CSTATES_DIS
+scp node1:~/turbo* ~/results/midtier/0US_PRE_FIXEDBW_CSTATES_DIS
 
 
 # # Run with 50us pre-request
@@ -156,7 +158,7 @@ scp node1:~/turbo* ~/results/midtier/0US_PRE_FIXEDNBW2
 # scp node2:~/turbo* ~/results/150US_PRE_FIXED/
 
 cd cseas_scripts
-for name in ADAPTIVE_FIXEDNBW2 WITHOUT_PRE_FIXEDNBW2 0US_PRE_FIXEDNBW2 # 50US_PRE_FIXED 100US_PRE_FIXED 150US_PRE_FIXED
+for name in ADAPTIVE_FIXEDBW_CSTATES_DIS WITHOUT_PRE_FIXEDBW_CSTATES_DIS 0US_PRE_FIXEDBW_CSTATES_DIS # 50US_PRE_FIXED 100US_PRE_FIXED 150US_PRE_FIXED
 do
     bash get_times_script.sh $name $name.txt
 done

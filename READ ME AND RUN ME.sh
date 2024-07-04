@@ -1,11 +1,11 @@
 # FIRSTLY, SEE fixed_cpu.sh UNDER cseas_scripts TO SET UP FIXED FREQUENCY
 
-curl 'https://ucc6a847146a03c8f8f0c1da78f7.dl.dropboxusercontent.com/cd/0/get/CSgQuTdxL6cv_C47zdC16SDPMNwvw68UiBrxD_1GUjegoZGt2AgXlnMHfe4Cqbx85DuR0wZpImdVoSjeS5DKhlCmbrBCFIL1fhZSMSLAami-HjKd0IfPqe89ZLSS534-pPv9M52QWdlF9ihjG5mOFos1LICATQWhfDq05jTIXwzszQ/file?_download_id=7646227232302012569994970768378581956273485335016636917487530687&_notify_domain=www.dropbox.com&dl=1' \
+curl 'https://uc610185013189784f76acedf04b.dl.dropboxusercontent.com/cd/0/get/CV9_JjR9pYVx7eoRwvYHGsidiLKlSy6ngcSaZg1w4hdp5u7ag-tNuSBiL42Ar8CzoXnNpQHpcUrkibusFzTY0xhKYPRfoNLTplVdaBXWsvgzD-S1MQuNvk9-4NlsFOWyNYmifQ4KwkaUYLxnyp5dUHZLZpW53JjcOWEesS196LjqGA/file?_download_id=60704493642151223823677481109349914813287885175422509480808120808&_notify_domain=www.dropbox.com&dl=1' \
   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
   -H 'accept-language: en-US,en;q=0.9' \
   -H 'priority: u=0, i' \
   -H 'referer: https://www.dropbox.com/' \
-  -H 'sec-ch-ua: "Chromium";v="124", "Microsoft Edge";v="124", "Not-A.Brand";v="99"' \
+  -H 'sec-ch-ua: "Not/A)Brand";v="8", "Chromium";v="126", "Microsoft Edge";v="126"' \
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "Windows"' \
   -H 'sec-fetch-dest: iframe' \
@@ -13,7 +13,7 @@ curl 'https://ucc6a847146a03c8f8f0c1da78f7.dl.dropboxusercontent.com/cd/0/get/CS
   -H 'sec-fetch-site: cross-site' \
   -H 'sec-fetch-user: ?1' \
   -H 'upgrade-insecure-requests: 1' \
-  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0' \
   --output HDSearch-dataset.tgz
 
 tar -xzvf HDSearch-dataset.tgz

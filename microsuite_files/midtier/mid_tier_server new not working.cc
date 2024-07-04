@@ -7,6 +7,10 @@
 #include <string>
 #include <thread>
 
+#include <condition_variable>
+#include <mutex>
+// #include <pthread.h>
+
 #include <grpc++/grpc++.h>
 
 #include "bucket_service/service/helper_files/client_helper.h"
@@ -38,12 +42,13 @@
 int send_request_usecs_wait = 0;
 bool pre_request = true;
 int client_fd1;
+bool busy_wait = true;
 
 int previous_average_time = 0;
 int process_request_count = 0;
 bool increasing = false;
 int step = 100;
-bool adaptive = false;
+bool adaptive = true;
 std::vector<long> times_taken;
 
 // Signal handler for SIGPIPE
@@ -118,8 +123,43 @@ void print_statistics(int repetitions, long *latency_array)
 
 // Helper thread code
 
+// void print_affinity(const std::string& thread_name) {
+//     cpu_set_t cpuset;
+//     CPU_ZERO(&cpuset);
+//     pthread_getaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+
+//     std::cout << thread_name << " running on CPU(s): ";
+//     for (int j = 0; j < CPU_SETSIZE; ++j) {
+//         if (CPU_ISSET(j, &cpuset)) {
+//             std::cout << j << " ";
+//         }
+//     }
+//     std::cout << std::endl;
+// }
+
 // Define a global atomic flag
 std::atomic<bool> sendRequestFlag(false);
+std::mutex mtx;
+std::condition_variable cv;
+
+// Function that waits for the flag to be set
+void waitForFlag()
+{
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait(lock, []
+            { return sendRequestFlag.load(std::memory_order_acquire); });
+    // Flag is now true, proceed with the rest of the function
+}
+
+// Function that sets the flag and notifies the waiting thread
+void setFlag()
+{
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        sendRequestFlag.store(true, std::memory_order_release);
+    }
+    cv.notify_one();
+}
 
 // Function to be executed by the helper thread
 void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
@@ -127,6 +167,7 @@ void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
     if (send_request_usecs_wait >= 0) // If it's negative, it will not send a pre-request
     {
         printf("Pre request sending enabled\n");
+        // Make this without busy waiting
         while (true)
         {
             // Wait until the flag is set to true
@@ -141,6 +182,8 @@ void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
 
                 // Instead of sleep(send_request_usecs_wait), I actively read the current timestamp and check whether the <send_request_usecs_wait> us have passed
                 // Also, I need to check that while waiting, I still want to send the pre-request
+
+                // sleep(send_request_usecs_wait);
                 while (end_time.tv_usec - start_time.tv_usec < send_request_usecs_wait && sendRequestFlag.load(std::memory_order_acquire))
                 {
                     gettimeofday(&end_time, NULL);
@@ -160,6 +203,30 @@ void helperThreadFunction(int client_fd1, char *hello, char *buffer, int port)
     }
 }
 
+// Function to be executed by the helper thread
+void helperThreadFunctionNoBusyWait(int client_fd1, char *hello, char *buffer, int port)
+{
+    if (send_request_usecs_wait >= 0) // If it's negative, it will not send a pre-request
+    {
+        printf("Pre request sending enabled\n");
+
+        usleep(send_request_usecs_wait);
+        // while (end_time.tv_usec - start_time.tv_usec < send_request_usecs_wait && sendRequestFlag.load(std::memory_order_acquire))
+        // {
+        //     gettimeofday(&end_time, NULL);
+        // }
+
+        if (sendRequestFlag.load(std::memory_order_acquire))
+        {
+            // Once the send_request_usecs_wait us have passed, send the request
+            printf("Pre-request sent\n");
+            send_request(true, client_fd1, hello, buffer, port); // Changed this to true so I can see the message
+        }
+
+        // Reset the flag
+        sendRequestFlag.store(false, std::memory_order_release);
+    }
+}
 // End of helper thread code
 
 #define FIXEDCOMP 10
@@ -660,8 +727,17 @@ void ProcessRequest(LoadGenRequest &load_gen_request,
 
     if (send_request_usecs_wait >= 0)
     {
+        // sendRequestFlag.store(true, std::memory_order_release);
+        // std::thread helperThread(helperThreadFunctionNoBusyWait, client_fd1, hello, buffer, PORT);
+
+        // Send the pre-request
+        if (busy_wait)
+            sendRequestFlag.store(true, std::memory_order_release);
+        // std::thread(helperThreadFunctionNoBusyWait, client_fd1, hello, buffer, PORT).detach();
+
         printf("Sending pre-request\n");
-        sendRequestFlag.store(true, std::memory_order_release);
+
+        // usleep(send_request_usecs_wait);
         // send_request(false, client_fd1, hello, buffer, 8080);
         // printf("Pre-request sent\n");
     }
@@ -1057,7 +1133,8 @@ int main(int argc, char **argv)
     long time_taken, total_time = 0;
 
     // Start the helper thread
-    std::thread helperThread(helperThreadFunction, client_fd1, hello, buffer, PORT);
+    if (busy_wait)
+        std::thread helperThread(helperThreadFunction, client_fd1, hello, buffer, PORT);
 
     // End of pre-request code
 
